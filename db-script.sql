@@ -1,17 +1,17 @@
 DROP TABLE IF EXISTS message;
-DROP TABLE IF EXISTS comment_table;
+DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS announcement;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF exists user_role;
-DROP TABLE IF EXISTS user_table;
-DROP TABLE IF EXISTS role_table;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
 
-CREATE TABLE role_table ( 
+CREATE TABLE roles ( 
 id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 name VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE user_table (
+CREATE TABLE users (
 id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
 login VARCHAR(50) NOT NULL UNIQUE,
 password VARCHAR(500) NOT NULL,
@@ -36,7 +36,7 @@ creator_id INT NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 closed_at TIMESTAMP,
 status VARCHAR(50) NOT NULL,
-FOREIGN KEY (creator_id) REFERENCES user_table(id),
+FOREIGN KEY (creator_id) REFERENCES users(id),
 FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
@@ -46,25 +46,26 @@ body VARCHAR(500) NOT NULL,
 sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 sender_id INT,
 receiver_id INT,
-FOREIGN KEY (sender_id) REFERENCES user_table(id),
-FOREIGN KEY (receiver_id) REFERENCES user_table(id)
+FOREIGN KEY (sender_id) REFERENCES users(id),
+FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
-CREATE TABLE comment_table ( 
+CREATE TABLE comment ( 
 id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 commented_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 sender_id INT,
 announcement_id INT,
-FOREIGN KEY (sender_id) REFERENCES user_table(id),
+FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 );
 
 CREATE TABLE user_role ( 
 user_id INT,
 role_id INT,
-FOREIGN KEY (user_id) REFERENCES user_table(id),
-FOREIGN KEY (role_id) REFERENCES role_table(id)
+primary key (user_id, role_id),
+FOREIGN KEY (user_id) REFERENCES users(id),
+FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 
