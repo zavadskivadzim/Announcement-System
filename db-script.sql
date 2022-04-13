@@ -1,3 +1,5 @@
+--CREATE DATABASE Announcement-System;
+
 DROP TABLE IF EXISTS message;
 DROP TABLE IF EXISTS comment;
 DROP TABLE IF EXISTS announcement;
