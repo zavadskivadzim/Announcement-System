@@ -2,9 +2,13 @@ package com.zavadski.model;
 
 import lombok.*;
 
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,9 +19,10 @@ import java.util.Objects;
 public class Role {
 
     @Id
+    @PrimaryKey
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @CassandraType(type = CassandraType.Name.UUID)
+    private UUID id = UUID.randomUUID();
 
     @Column
     private String name;
