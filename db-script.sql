@@ -6,33 +6,35 @@ DROP TABLE IF exists user_role;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE category ( 
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+name VARCHAR(50) NOT NULL unique
+);
+
 CREATE TABLE roles ( 
-id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 name VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE users (
-id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 login VARCHAR(50) NOT NULL UNIQUE,
-password VARCHAR(500) NOT NULL,
+password VARCHAR(200) NOT NULL,
 first_name VARCHAR(50) NOT NULL,
 surname VARCHAR(50) NOT NULL,
 birthday DATE NOT null,
 rating INT
 );
 
-CREATE TABLE category ( 
-id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-name VARCHAR(50) NOT NULL UNIQUE
-);
-
 CREATE TABLE announcement ( 
-id INT GENERATED ALWAYS AS IDENTITY PRIMARY key,
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 price NUMERIC NOT NULL,
 rating INT,
-category_id INT NOT NULL,
-creator_id INT NOT NULL,
+category_id UUID NOT NULL,
+creator_id UUID NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 closed_at TIMESTAMP,
 status VARCHAR(50) NOT NULL,
@@ -41,32 +43,29 @@ FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
 CREATE TABLE message ( 
-id INT GENERATED ALWAYS AS IDENTITY PRIMARY key,
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-sender_id INT,
-receiver_id INT,
+sender_id UUID,
+receiver_id UUID,
 FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
 
 CREATE TABLE comment ( 
-id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 commented_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-sender_id INT,
-announcement_id INT,
+sender_id UUID,
+announcement_id UUID,
 FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 );
 
 CREATE TABLE user_role ( 
-user_id INT,
-role_id INT,
+user_id UUID NOT NULL,
+role_id UUID NOT NULL,
 primary key (user_id, role_id),
 FOREIGN KEY (user_id) REFERENCES users(id),
 FOREIGN KEY (role_id) REFERENCES roles(id)
 );
-
-
-
