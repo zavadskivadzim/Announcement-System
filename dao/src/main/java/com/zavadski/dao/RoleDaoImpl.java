@@ -21,13 +21,26 @@ public class RoleDaoImpl implements RoleDao {
 
         logger.debug("Get all roles");
 
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Role.class).buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        List<Role> roles = session.createQuery("from Role").getResultList();
+        List<Role> roles = session.createQuery("from Role", Role.class).getResultList();
         session.getTransaction().commit();
         session.close();
 
         return roles;
+    }
+
+    @Override
+    public Role save(Role role) {
+
+        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Role.class).buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(role);
+        session.getTransaction().commit();
+        session.close();
+
+        return role;
     }
 }
