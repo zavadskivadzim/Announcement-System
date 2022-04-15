@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -30,58 +29,4 @@ public class RoleDaoImpl implements RoleDao {
         return roles;
     }
 
-    @Override
-    public Role save(Role role) {
-
-        logger.info("Create role {}", role);
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        session.save(role);
-        session.getTransaction().commit();
-        session.close();
-
-        return role;
-    }
-
-    @Override
-    public Role findById(UUID id) {
-
-        logger.info("Find role by id={}", id);
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        Role role = session.get(Role.class, id);
-        session.getTransaction().commit();
-        session.close();
-
-        return role;
-    }
-
-    @Override
-    public Role update(Role role) {
-
-        logger.info("Update role {}", role);
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        session.update(role);
-        session.getTransaction().commit();
-        session.close();
-
-        return role;
-    }
-
-    @Override
-    public void delete(UUID id) {
-
-        logger.info("Delete role by id={}", id);
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        Role role = session.get(Role.class, id);
-        session.delete(role);
-        session.getTransaction().commit();
-        session.close();
-    }
 }

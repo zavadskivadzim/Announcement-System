@@ -1,8 +1,8 @@
 package service;
 
-import com.zavadski.dao.RoleDaoImpl;
-import com.zavadski.model.Role;
-import com.zavadski.service.RoleServiceImpl;
+import com.zavadski.dao.UserDaoImpl;
+import com.zavadski.model.User;
+import com.zavadski.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,33 +22,33 @@ import static org.mockito.Mockito.when;
 class GuestServiceImplTest {
 
     @Mock
-    private RoleDaoImpl roleDao;
+    private UserDaoImpl userDao;
 
     @InjectMocks
-    private RoleServiceImpl roleService;
+    private UserServiceImpl userService;
 
-    private Role role = new Role();
-    private List<Role> roles = new ArrayList<>();
+    private User user = new User();
+    private List<User> users = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
-        role.setName("TEST");
+        user.setLogin("TEST");
     }
 
     @Test
-    void testFindAllRoles() {
+    void testFindAllUsers() {
 
-        roles.add(role);
+        users.add(user);
 
-        when(roleDao.findAll()).thenReturn(roles);
+        when(userDao.findAll()).thenReturn(users);
 
-        List<Role> expectedRoles = roleService.findAll();
+        List<User> expectedRoles = userService.findAll();
 
         assertNotNull(expectedRoles);
         assertEquals(1, expectedRoles.size());
-        assertSame(expectedRoles, roles);
+        assertSame(expectedRoles, users);
 
-        verify(roleDao, Mockito.times(1)).findAll();
+        verify(userDao, Mockito.times(1)).findAll();
     }
 
 }

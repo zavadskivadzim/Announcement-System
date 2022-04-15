@@ -1,24 +1,22 @@
 package com.zavadski.model.dto;
 
-import com.zavadski.model.Role;
-
+import com.zavadski.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MappingDto {
 
-    public RoleDto mapToRoleDto(Role role) {
-        RoleDto roleDto = new RoleDto();
-        roleDto.setId(role.getId());
-        roleDto.setName(role.getName());
-        return roleDto;
+    public UserDto mapToUserDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setLogin(user.getLogin());
+        return userDto;
     }
 
-    public Role mapToRole(RoleDto roleDto) {
-        Role role = new Role();
-        role.setId(roleDto.getId());
-        role.setName(roleDto.getName());
-        return role;
+    public User mapToUser(UserDto userDto) {
+        User user = new User();
+        user.setId(userDto.getId());
+        return user;
     }
 
 }

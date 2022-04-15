@@ -5,9 +5,10 @@ import lombok.Data;
 import java.util.UUID;
 
 @Data
-public class RoleDto {
+public class UserDto {
 
     private UUID id = UUID.randomUUID();
-    private String name;
+    private String login;
+    private String password;
 
 }
