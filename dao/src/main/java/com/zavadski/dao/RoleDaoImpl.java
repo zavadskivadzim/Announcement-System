@@ -1,6 +1,7 @@
 package com.zavadski.dao;
 
 import com.zavadski.dao.api.RoleDao;
+import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,10 +20,10 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public List<Role> findAll() {
 
-        logger.debug("Get all roles");
+        logger.info("Get all roles");
 
-        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Role.class).buildSessionFactory();
-        Session session = sessionFactory.openSession();
+
+        Session session = HibernateUtil.getSession();
         session.beginTransaction();
         List<Role> roles = session.createQuery("from Role", Role.class).getResultList();
         session.getTransaction().commit();
