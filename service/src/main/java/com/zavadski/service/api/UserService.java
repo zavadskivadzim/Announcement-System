@@ -9,11 +9,16 @@ public interface UserService {
 
     List<User> findAll();
 
-    User save(User user);
-
     User findById(UUID id);
 
     User update(User user);
 
     void delete(UUID id);
+
+    User register(User user);
+
+    User findByLogin(String login);
+
+    User findByLoginAndPassword(String login, String password);
+
 }
