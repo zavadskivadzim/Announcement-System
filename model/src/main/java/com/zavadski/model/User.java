@@ -29,7 +29,7 @@ public class User {
     @Column
     private String password;
 
-    @Column
+    @Column(name = "first_name")
     private String firstName;
 
     @Column
