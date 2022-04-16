@@ -86,6 +86,7 @@ public class UserDaoImpl implements UserDao {
         session.close();
     }
 
+    @Override
     public User findByLogin(String login) {
 
         Session session = HibernateUtil.getSession();
