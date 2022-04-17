@@ -1,4 +1,4 @@
-package com.zavadski.security.config;
+package com.zavadski.security;
 
 import com.zavadski.model.User;
 import org.springframework.security.core.GrantedAuthority;

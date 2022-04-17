@@ -1,7 +1,5 @@
-package com.zavadski.security.config.jwt;
+package com.zavadski.security;
 
-import com.zavadski.security.config.UserDetailsImpl;
-import com.zavadski.security.config.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

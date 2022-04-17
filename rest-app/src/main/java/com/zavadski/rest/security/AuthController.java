@@ -1,10 +1,10 @@
 package com.zavadski.rest.security;
 
-import com.zavadski.security.config.jwt.JwtProvider;
 import com.zavadski.model.User;
 import com.zavadski.model.security.AuthRequest;
 import com.zavadski.model.security.AuthResponse;
 import com.zavadski.model.security.RegistrationRequest;
+import com.zavadski.security.JwtProvider;
 import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

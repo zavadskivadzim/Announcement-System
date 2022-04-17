@@ -1,4 +1,4 @@
-package com.zavadski.security.config.jwt;
+package com.zavadski.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
