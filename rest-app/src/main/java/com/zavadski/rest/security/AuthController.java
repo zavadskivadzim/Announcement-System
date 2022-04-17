@@ -1,6 +1,6 @@
-package com.zavadski.rest.sequrity;
+package com.zavadski.rest.security;
 
-import com.zavadski.config.jwt.JwtProvider;
+import com.zavadski.security.config.jwt.JwtProvider;
 import com.zavadski.model.User;
 import com.zavadski.model.security.AuthRequest;
 import com.zavadski.model.security.AuthResponse;

@@ -1,6 +1,6 @@
-package com.zavadski.config;
+package com.zavadski.security.config;
 
-import com.zavadski.config.jwt.JwtFilter;
+import com.zavadski.security.config.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

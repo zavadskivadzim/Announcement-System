@@ -16,16 +16,14 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
-    private final RoleDao roleDao;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
-        this.roleDao = roleDao;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private RoleDao roleDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAll() {
@@ -48,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(User user) {
+    public void register(User user) {
 
         Role roleUser = roleDao.findByName("ROLE_USER");
         List<Role> userRoles = new ArrayList<>();
@@ -57,7 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(userRoles);
 
-        return userDao.save(user);
+        userDao.save(user);
     }
 
     @Override

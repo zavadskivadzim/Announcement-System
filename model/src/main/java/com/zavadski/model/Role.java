@@ -23,7 +23,7 @@ public class Role {
     @Column
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<User> users;
 

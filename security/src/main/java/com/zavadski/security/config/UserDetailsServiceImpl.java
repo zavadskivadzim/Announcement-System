@@ -1,4 +1,4 @@
-package com.zavadski.config;
+package com.zavadski.security.config;
 
 import com.zavadski.model.User;
 import com.zavadski.service.api.UserService;
