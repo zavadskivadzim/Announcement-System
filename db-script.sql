@@ -20,15 +20,24 @@ id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 name VARCHAR(50) NOT NULL UNIQUE
 );
 
+INSERT INTO roles (name) values('ADMIN');
+INSERT INTO roles (name) values('USER');
+
 CREATE TABLE users (
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 login VARCHAR(50) NOT NULL UNIQUE,
-password VARCHAR(200) NOT NULL,
-first_name VARCHAR(50) NOT NULL,
-surname VARCHAR(50) NOT NULL,
-birthday DATE NOT null,
-rating INT
+password VARCHAR(200) NOT NULL
 );
+
+--CREATE TABLE users (
+--id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+--login VARCHAR(50) NOT NULL UNIQUE,
+--password VARCHAR(200) NOT NULL,
+--first_name VARCHAR(50) NOT NULL,
+--surname VARCHAR(50) NOT NULL,
+--birthday DATE NOT null,
+--email VARCHAR(50) NOT NULL
+--);
 
 CREATE TABLE announcement ( 
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
