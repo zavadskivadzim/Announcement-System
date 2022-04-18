@@ -6,9 +6,9 @@ import com.zavadski.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
 import java.util.List;
 import java.util.UUID;
 
@@ -94,7 +94,7 @@ public class UserDaoImpl implements UserDao {
         String hql = "from User where login = :login";
         Query query = session.createQuery(hql);
         query.setParameter("login", login);
-        User user = (User) query.getResultList().get(0);
+        User user = (User) query.uniqueResult();
         session.getTransaction().commit();
         session.close();
 

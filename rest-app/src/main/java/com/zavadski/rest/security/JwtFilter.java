@@ -1,4 +1,4 @@
-package com.zavadski.security;
+package com.zavadski.rest.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -19,20 +19,20 @@ public class UserDto {
     public User toUser() {
         User user = new User();
         user.setId(id);
-        user.setFirstName(firstName);
-        user.setSurname(surname);
-        user.setBirthday(birthday);
-        user.setEmail(email);
+//        user.setFirstName(firstName);
+//        user.setSurname(surname);
+//        user.setBirthday(birthday);
+//        user.setEmail(email);
         return user;
     }
 
     public static UserDto fromUser(User user) {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setSurname(user.getSurname());
-        userDto.setBirthday(user.getBirthday());
-        userDto.setEmail(user.getEmail());
+//        userDto.setFirstName(user.getFirstName());
+//        userDto.setSurname(user.getSurname());
+//        userDto.setBirthday(user.getBirthday());
+//        userDto.setEmail(user.getEmail());
         return userDto;
     }
 
