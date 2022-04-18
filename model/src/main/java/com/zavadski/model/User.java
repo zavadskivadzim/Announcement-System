@@ -28,20 +28,20 @@ public class User {
 
     @Column
     private String password;
-//
-//    @Column(name = "first_name")
-//    private String firstName;
-//
-//    @Column
-//    private String surname;
-//
-//    @Column(name = "birthday")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+3")
-//    private LocalDate birthday;
-//
-//    @Column
-//    private String email;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column
+    private String surname;
+
+    @Column(name = "birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+3")
+    private LocalDate birthday;
+
+    @Column
+    private String email;
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",

@@ -20,23 +20,23 @@ id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 name VARCHAR(50) NOT NULL UNIQUE
 );
 
+CREATE TABLE users (
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+login VARCHAR(50) NOT NULL UNIQUE,
+password VARCHAR(200),
+first_name VARCHAR(50),
+surname VARCHAR(50),
+birthday DATE,
+email VARCHAR(50)
+);
+
 --CREATE TABLE users (
 --id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 --login VARCHAR(50) NOT NULL UNIQUE,
 --password VARCHAR(200) NOT NULL,
---first_name VARCHAR(50) NOT NULL,
---surname VARCHAR(50) NOT NULL,
---birthday DATE NOT null,
---email VARCHAR(50) NOT NULL
+--role_id INT,
+--FOREIGN KEY (role_id) REFERENCES roles(id)
 --);
-
-CREATE TABLE users (
-id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-login VARCHAR(50) NOT NULL UNIQUE,
-password VARCHAR(200) NOT NULL,
-role_id INT,
-FOREIGN KEY (role_id) REFERENCES roles(id)
-);
 
 CREATE TABLE announcement ( 
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -83,3 +83,13 @@ FOREIGN KEY (role_id) REFERENCES roles(id)
 
 INSERT INTO roles (name) values('ADMIN');
 INSERT INTO roles (name) values('USER');
+
+select *from users
+ed272b4e-e486-4e3a-b84f-ab2cd587e0f1
+
+select *from roles
+2990bedb-9538-46ca-b2c8-c5054fbf18c1
+
+INSERT INTO user_role (user_id, role_id) values('ed272b4e-e486-4e3a-b84f-ab2cd587e0f1', '2990bedb-9538-46ca-b2c8-c5054fbf18c1');
+
+

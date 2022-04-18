@@ -25,8 +25,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/users")
-    public final List<UserDto> findAllRoles() {
+    @GetMapping(value = "/user/users")
+    public final List<UserDto> findAllUsers() {
 
         logger.info("find All Users");
 
