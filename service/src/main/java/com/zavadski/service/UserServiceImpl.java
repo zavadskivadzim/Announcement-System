@@ -46,16 +46,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(User user) {
+    public User register(User user) {
 
-        Role roleUser = roleDao.findByName("ROLE_USER");
-        List<Role> userRoles = new ArrayList<>();
-        userRoles.add(roleUser);
-
+        Role userRole = roleDao.findByName("USER");
+        user.setRole(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(userRoles);
+        return userDao.save(user);
+//        Role roleUser = roleDao.findByName("ROLE_USER");
+//        List<Role> userRoles = new ArrayList<>();
+//        userRoles.add(roleUser);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setRoles(userRoles);
+//        userDao.save(user);
 
-        userDao.save(user);
     }
 
     @Override

@@ -89,6 +89,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findByLogin(String login) {
 
+        logger.info("Find user by login={}", login);
+
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         String hql = "from User where login = :login";

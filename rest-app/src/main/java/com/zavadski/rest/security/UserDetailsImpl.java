@@ -1,30 +1,32 @@
 package com.zavadski.rest.security;
 
 import com.zavadski.model.User;
-import org.apache.logging.log4j.core.jackson.ListOfMapEntryDeserializer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
 
     private String login;
     private String password;
-    private List<GrantedAuthority> grantedAuthorities;
+    private Collection<? extends GrantedAuthority> grantedAuthorities;
 
     public static UserDetailsImpl fromUserToUserDetails(User user) {
 
         UserDetailsImpl userDetails = new UserDetailsImpl();
         userDetails.login = user.getLogin();
         userDetails.password = user.getPassword();
-        userDetails.grantedAuthorities = user.getRoles().stream()
-                .map(role ->
-                        new SimpleGrantedAuthority(role.getName())
-                ).collect(Collectors.toList());
+        userDetails.grantedAuthorities = Collections.singletonList(
+                new SimpleGrantedAuthority(
+                        user.getRole().getName()));
+
+//        userDetails.grantedAuthorities = user.getRoles().stream()
+//                .map(role ->
+//                        new SimpleGrantedAuthority(role.getName())
+//                ).collect(Collectors.toList());
 
         return userDetails;
     }

@@ -27,7 +27,9 @@ password VARCHAR(200),
 first_name VARCHAR(50),
 surname VARCHAR(50),
 birthday DATE,
-email VARCHAR(50)
+email VARCHAR(50),
+role_id UUID,
+FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 --CREATE TABLE users (
@@ -72,24 +74,22 @@ FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 );
 
-CREATE TABLE user_role ( 
-user_id UUID NOT NULL,
-role_id UUID NOT NULL,
-primary key (user_id, role_id),
-FOREIGN KEY (user_id) REFERENCES users(id),
-FOREIGN KEY (role_id) REFERENCES roles(id)
-);
+--CREATE TABLE user_role ( 
+--user_id UUID NOT NULL,
+--role_id UUID NOT NULL,
+--primary key (user_id, role_id),
+--FOREIGN KEY (user_id) REFERENCES users(id),
+--FOREIGN KEY (role_id) REFERENCES roles(id)
+--);
 
 
 INSERT INTO roles (name) values('ADMIN');
 INSERT INTO roles (name) values('USER');
 
 select *from users
-ed272b4e-e486-4e3a-b84f-ab2cd587e0f1
 
 select *from roles
-2990bedb-9538-46ca-b2c8-c5054fbf18c1
 
-INSERT INTO user_role (user_id, role_id) values('ed272b4e-e486-4e3a-b84f-ab2cd587e0f1', '2990bedb-9538-46ca-b2c8-c5054fbf18c1');
+
 
 

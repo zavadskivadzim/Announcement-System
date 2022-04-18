@@ -23,9 +23,9 @@ public class Role {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<User> users;
+//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private List<User> users;
 
     @Override
     public boolean equals(Object o) {
