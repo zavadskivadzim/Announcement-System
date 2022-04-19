@@ -6,10 +6,9 @@ import com.zavadski.model.Role;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -34,12 +33,14 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role findByName(String name) {
 
+        logger.info("Find role by name={}", name);
+
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         String hql = "from Role where name = :name";
         Query query = session.createQuery(hql);
         query.setParameter("name", name);
-        Role role = (Role) query.uniqueResult();
+        Role role = (Role) query.getResultList().get(0);
         session.getTransaction().commit();
         session.close();
 

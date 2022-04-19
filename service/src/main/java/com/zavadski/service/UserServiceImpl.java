@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
 
-        Role userRole = roleDao.findByName("USER");
+        Role userRole = roleDao.findByName("ROLE_USER");
         user.setRole(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 //        userRoles.add(roleUser);
 //        user.setPassword(passwordEncoder.encode(user.getPassword()));
 //        user.setRoles(userRoles);
-//        userDao.save(user);
+//        return userDao.save(user);
 
     }
 

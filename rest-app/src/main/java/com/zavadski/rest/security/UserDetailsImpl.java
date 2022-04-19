@@ -20,8 +20,7 @@ public class UserDetailsImpl implements UserDetails {
         userDetails.login = user.getLogin();
         userDetails.password = user.getPassword();
         userDetails.grantedAuthorities = Collections.singletonList(
-                new SimpleGrantedAuthority(
-                        user.getRole().getName()));
+                new SimpleGrantedAuthority(user.getRole().getName()));
 
 //        userDetails.grantedAuthorities = user.getRoles().stream()
 //                .map(role ->
