@@ -14,6 +14,7 @@ public class UserDto {
     private String surname;
     private LocalDate birthday;
     private String email;
+    private String password;
 
 
     public User toUser() {
@@ -23,6 +24,7 @@ public class UserDto {
         user.setSurname(surname);
         user.setBirthday(birthday);
         user.setEmail(email);
+        user.setPassword(password);
         return user;
     }
 
@@ -33,6 +35,7 @@ public class UserDto {
         userDto.setSurname(user.getSurname());
         userDto.setBirthday(user.getBirthday());
         userDto.setEmail(user.getEmail());
+        userDto.setPassword(user.getPassword());
         return userDto;
     }
 

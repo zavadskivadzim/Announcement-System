@@ -25,7 +25,10 @@ public class AuthController {
         user.setPassword(registrationRequest.getPassword());
         user.setLogin(registrationRequest.getLogin());
         userService.register(user);
-        return "OK";
+        if (user.getRole().getName().equals("ROLE_ADMIN")) {
+            return "You have role ADMIN";
+        }
+        return "You have role USER";
     }
 
     @PostMapping("/auth")

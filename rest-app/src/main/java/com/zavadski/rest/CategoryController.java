@@ -6,7 +6,9 @@ import com.zavadski.service.api.CategoryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +45,7 @@ public class CategoryController {
         return CategoryDto.fromCategory(category);
     }
 
+    @Secured("ROLE_ADMIN")
     @PostMapping(path = "/categories")
     @ResponseStatus(HttpStatus.CREATED)
     public final void createCategory(@RequestBody CategoryDto category) {
@@ -52,6 +55,7 @@ public class CategoryController {
         categoryService.save(category.toCategory());
     }
 
+    @Secured("ROLE_ADMIN")
     @PutMapping(value = "/categories")
     @ResponseStatus(HttpStatus.OK)
     public final Category updateCategory(@RequestBody CategoryDto category) {
@@ -61,6 +65,7 @@ public class CategoryController {
         return categoryService.update(category.toCategory());
     }
 
+    @Secured("ROLE_ADMIN")
     @DeleteMapping(value = "/categories/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCategory(@PathVariable UUID id) {

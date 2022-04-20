@@ -32,14 +32,6 @@ role_id UUID,
 FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
---CREATE TABLE users (
---id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
---login VARCHAR(50) NOT NULL UNIQUE,
---password VARCHAR(200) NOT NULL,
---role_id INT,
---FOREIGN KEY (role_id) REFERENCES roles(id)
---);
-
 CREATE TABLE announcement ( 
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
@@ -86,10 +78,14 @@ FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 INSERT INTO roles (name) values('ROLE_ADMIN');
 INSERT INTO roles (name) values('ROLE_USER');
 
+select id from roles where "name" ='ROLE_ADMIN';
+
+INSERT INTO category (name) values('bike');
+INSERT INTO category (name) values('motorbike');
+INSERT INTO category (name) values('auto');
+INSERT INTO category (name) values('bus');
+
 select * from users;
-
-select * from roles
-
-
-
+select * from roles;
+select * from category;
 
