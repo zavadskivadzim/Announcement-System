@@ -28,7 +28,7 @@ class GuestServiceImplTest {
     private UserServiceImpl userService;
 
     private User user = new User();
-    private List<User> users = new ArrayList<>();
+    private List<User> userEntities = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
@@ -38,15 +38,15 @@ class GuestServiceImplTest {
     @Test
     void testFindAllUsers() {
 
-        users.add(user);
+        userEntities.add(user);
 
-        when(userDao.findAll()).thenReturn(users);
+        when(userDao.findAll()).thenReturn(userEntities);
 
         List<User> expectedRoles = userService.findAll();
 
         assertNotNull(expectedRoles);
         assertEquals(1, expectedRoles.size());
-        assertSame(expectedRoles, users);
+        assertSame(expectedRoles, userEntities);
 
         verify(userDao, Mockito.times(1)).findAll();
     }

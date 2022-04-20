@@ -1,5 +1,6 @@
 package com.zavadski.dao.util;
 
+import com.zavadski.model.Category;
 import com.zavadski.model.Role;
 import com.zavadski.model.User;
 import org.hibernate.Session;
@@ -14,6 +15,7 @@ public class HibernateUtil {
         sessionFactory = new Configuration().configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Role.class)
                 .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Category.class)
                 .buildSessionFactory();
     }
 

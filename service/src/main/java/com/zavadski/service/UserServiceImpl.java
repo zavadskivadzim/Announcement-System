@@ -1,33 +1,33 @@
 package com.zavadski.service;
 
+import com.zavadski.dao.api.RoleDao;
 import com.zavadski.dao.api.UserDao;
+import com.zavadski.model.Role;
 import com.zavadski.model.User;
 import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
+    @Autowired
+    private UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    private RoleDao roleDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> findAll() {
         return userDao.findAll();
-    }
-
-    @Override
-    public User save(User user) {
-        return userDao.save(user);
     }
 
     @Override
@@ -43,6 +43,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(UUID id) {
         userDao.delete(id);
+    }
+
+    @Override
+    public User register(User user) {
+
+        Role userRole = roleDao.findByName("ROLE_USER");
+        user.setRole(userRole);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userDao.save(user);
+//        Role roleUser = roleDao.findByName("ROLE_USER");
+//        List<Role> userRoles = new ArrayList<>();
+//        userRoles.add(roleUser);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setRoles(userRoles);
+//        return userDao.save(user);
+
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return userDao.findByLogin(login);
+    }
+
+    public User findByLoginAndPassword(String login, String password) {
+        User user = findByLogin(login);
+        if (user != null) {
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }
