@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -22,11 +23,28 @@ public class RoleDaoImpl implements RoleDao {
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        List<Role> roles = session.createQuery("from Role", Role.class).getResultList();
+        List<Role> roleEntities = session.createQuery("from Role", Role.class).getResultList();
         session.getTransaction().commit();
         session.close();
 
-        return roles;
+        return roleEntities;
+    }
+
+    @Override
+    public Role findByName(String name) {
+
+        logger.info("Find role by name={}", name);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        String hql = "from Role where name = :name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", name);
+        Role role = (Role) query.getResultList().get(0);
+        session.getTransaction().commit();
+        session.close();
+
+        return role;
     }
 
 }

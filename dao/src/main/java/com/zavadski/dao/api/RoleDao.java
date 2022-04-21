@@ -8,4 +8,6 @@ public interface RoleDao {
 
     List<Role> findAll();
 
+    Role findByName(String name);
+
 }

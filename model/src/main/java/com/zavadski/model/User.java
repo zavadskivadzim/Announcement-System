@@ -29,26 +29,28 @@ public class User {
     @Column
     private String password;
 
-//    @Column
-//    private String firstName;
-//
-//    @Column
-//    private String surname;
-//
-//    @Column(name = "birthday")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+3")
-//    private LocalDate birthday;
-//
-//    @Column
-//    private String email;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @ToString.Exclude
-    private List<Role> roles;
+    @Column
+    private String surname;
+
+    @Column(name = "birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+3")
+    private LocalDate birthday;
+
+    @Column
+    private String email;
+
+    //    @ManyToMany (fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_role",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @Override
     public boolean equals(Object o) {

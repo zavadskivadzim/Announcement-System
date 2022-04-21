@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 import java.util.UUID;
 
@@ -83,5 +84,22 @@ public class UserDaoImpl implements UserDao {
         session.delete(user);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public User findByLogin(String login) {
+
+        logger.info("Find user by login={}", login);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        String hql = "from User where login = :login";
+        Query query = session.createQuery(hql);
+        query.setParameter("login", login);
+        User user = (User) query.getResultList().get(0);
+        session.getTransaction().commit();
+        session.close();
+
+        return user;
     }
 }
