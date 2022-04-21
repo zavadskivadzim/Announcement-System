@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -38,12 +39,12 @@ public class Announcement {
     @Column(name = "created_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+3")
-    private LocalDate dateOfCreating;
+    private LocalDateTime dateOfCreating;
 
-    @Column(name = "created_at")
+    @Column(name = "closed_at")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+3")
-    private LocalDate dateOfClosing;
+    private LocalDateTime dateOfClosing;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

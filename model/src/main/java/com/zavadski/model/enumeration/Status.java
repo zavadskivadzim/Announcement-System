@@ -1,4 +1,7 @@
 package com.zavadski.model.enumeration;
 
-public enum Status {
+import java.io.Serializable;
+
+public enum Status implements Serializable {
+    ACTIVE, CLOSE
 }

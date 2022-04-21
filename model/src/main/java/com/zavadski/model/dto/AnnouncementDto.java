@@ -2,11 +2,11 @@ package com.zavadski.model.dto;
 
 import com.zavadski.model.Announcement;
 import com.zavadski.model.Category;
-import com.zavadski.model.User;
 import com.zavadski.model.enumeration.Status;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -17,8 +17,8 @@ public class AnnouncementDto {
     private Integer price;
     private Category category;
     private UserDto userDto;
-    private LocalDate dateOfCreating;
-    private LocalDate dateOfClosing;
+    private LocalDateTime dateOfCreating;
+    private LocalDateTime dateOfClosing;
     private Status status;
 
     public Announcement toAnnouncement() {
@@ -28,15 +28,23 @@ public class AnnouncementDto {
         announcement.setPrice(price);
         announcement.setCategory(category);
         announcement.setUser(userDto.toUser());
-
+        announcement.setDateOfCreating(dateOfCreating);
+        announcement.setDateOfClosing(dateOfClosing);
+        announcement.setStatus(status);
         return announcement;
     }
 
-    public static CategoryDto fromAnnouncement(Announcement announcementy) {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(category.getId());
-        categoryDto.setName(category.getName());
-        return categoryDto;
+    public static AnnouncementDto fromAnnouncement(Announcement announcement) {
+        AnnouncementDto announcementDto = new AnnouncementDto();
+        announcementDto.setId(announcement.getId());
+        announcementDto.setBody(announcement.getBody());
+        announcementDto.setPrice(announcement.getPrice());
+        announcementDto.setCategory(announcement.getCategory());
+        announcementDto.setUserDto(UserDto.fromUser(announcement.getUser()));
+        announcementDto.setDateOfCreating(announcement.getDateOfCreating());
+        announcementDto.setDateOfClosing(announcement.getDateOfClosing());
+        announcementDto.setStatus(announcement.getStatus());
+        return announcementDto;
     }
 
 }

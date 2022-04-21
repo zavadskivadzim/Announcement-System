@@ -44,12 +44,12 @@ CREATE TABLE announcement (
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 price NUMERIC NOT NULL,
-rating INT,
+--rating INT,
 category_id UUID NOT NULL,
 creator_id UUID NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 closed_at TIMESTAMP,
-status VARCHAR(50) NOT NULL,
+status VARCHAR(50) DEFAULT 'ACTIVE',
 FOREIGN KEY (creator_id) REFERENCES users(id),
 FOREIGN KEY (category_id) REFERENCES category(id)
 );
@@ -86,10 +86,18 @@ FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 INSERT INTO roles (name) values('ROLE_ADMIN');
 INSERT INTO roles (name) values('ROLE_USER');
 
+INSERT INTO category (name) values('bike');
+INSERT INTO category (name) values('auto');
+INSERT INTO category (name) values('bus');
+
+INSERT INTO announcement (body, price, category_id, creator_id) 
+values('ddd', 120, '4baf8dbc-fac4-4ff4-9688-3445599b1ea9', 'a335ff2a-d1e7-41d8-8c98-10b23aca4221');
+
+
 select * from users;
-
-select * from roles
-
+select * from roles;
+select * from category;
+select * from announcement;
 
 
 
