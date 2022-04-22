@@ -9,6 +9,7 @@ import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -29,10 +30,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public Announcement save(CreateAnnouncementDto createAnnouncementDto, UUID id) {
+    public Announcement save(CreateAnnouncementDto createAnnouncementDto) {
         Announcement announcement = createAnnouncementDto.toAnnouncement();
-        User author = userService.findById(id);
+        User author = userService.findByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         announcement.setUser(author);
+        System.out.println(announcement);
         return announcementDao.save(announcement);
     }
 

@@ -10,7 +10,7 @@ public interface AnnouncementService {
 
     Announcement findById(UUID id);
 
-    Announcement save(CreateAnnouncementDto createAnnouncementDto, UUID id);
+    Announcement save(CreateAnnouncementDto createAnnouncementDto);
 
     //    List<Category> findAll();
 
