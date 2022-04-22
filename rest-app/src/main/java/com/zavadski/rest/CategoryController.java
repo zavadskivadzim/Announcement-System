@@ -36,11 +36,11 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/categories/{id}")
-    public final CategoryDto getCategoryById(@PathVariable UUID id) {
+    public final CategoryDto getCategoryById(@PathVariable String id) {
 
         logger.info("get Category By Id={}", id);
 
-        Category category = categoryService.findById(id);
+        Category category = categoryService.findById(UUID. fromString(id));
         return CategoryDto.fromCategory(category);
     }
 

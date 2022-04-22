@@ -17,7 +17,10 @@ public class JwtProvider {
     private String jwtSecret;
 
     public String generateToken(String login) {
-        Date date = Date.from(LocalDate.now().plusDays(30).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date date = Date.from(LocalDate.now()
+                .plusDays(30)
+                .atStartOfDay(ZoneId.systemDefault())
+                .toInstant());
         return Jwts.builder()
                 .setSubject(login)
                 .setExpiration(date)
@@ -35,7 +38,10 @@ public class JwtProvider {
     }
 
     public String getLoginFromToken(String token) {
-        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
         return claims.getSubject();
     }
 }

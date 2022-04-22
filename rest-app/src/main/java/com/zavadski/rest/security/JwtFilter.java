@@ -27,7 +27,10 @@ public class JwtFilter extends GenericFilterBean {
     private UserDetailsServiceImpl userDetailsService;
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain filterChain)
+            throws IOException, ServletException {
 
         logger.info("do filter...");
 

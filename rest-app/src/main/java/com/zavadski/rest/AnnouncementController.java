@@ -47,14 +47,16 @@ public class AnnouncementController {
         return AnnouncementDto.fromAnnouncement(announcement);
     }
 
+    UUID request_id;
+
     @PostMapping(path = "/announcements")
     @ResponseStatus(HttpStatus.CREATED)
-    public final void createAnnouncement(@RequestBody CreateAnnouncementDto createAnnouncementDto,
+    public final Announcement createAnnouncement(@RequestBody CreateAnnouncementDto createAnnouncementDto,
                                          @RequestHeader("${request.id}") UUID id) {
 
         logger.info("create Announcement ({})", createAnnouncementDto);
 
-        announcementService.save(createAnnouncementDto.toAnnouncementDto().toAnnouncement());
+        return announcementService.save(createAnnouncementDto, id);
     }
 
 //    @PostMapping

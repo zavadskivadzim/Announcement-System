@@ -1,6 +1,7 @@
 package com.zavadski.service.api;
 
 import com.zavadski.model.Announcement;
+import com.zavadski.model.dto.CreateAnnouncementDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,7 +10,7 @@ public interface AnnouncementService {
 
     Announcement findById(UUID id);
 
-    Announcement save(Announcement announcement, UUID id);
+    Announcement save(CreateAnnouncementDto createAnnouncementDto, UUID id);
 
     //    List<Category> findAll();
 

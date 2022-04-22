@@ -1,12 +1,7 @@
 package com.zavadski.model.dto;
 
 import com.zavadski.model.Announcement;
-import com.zavadski.model.Category;
-import com.zavadski.model.enumeration.Status;
 import lombok.Data;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 public class CreateAnnouncementDto {
@@ -15,17 +10,17 @@ public class CreateAnnouncementDto {
     private Integer price;
 
 
-    public AnnouncementDto toAnnouncementDto() {
-        AnnouncementDto announcement = new AnnouncementDto();
+    public Announcement toAnnouncement() {
+        Announcement announcement = new Announcement();
         announcement.setBody(body);
         announcement.setPrice(price);
         return announcement;
     }
 
-    public static CreateAnnouncementDto fromAnnouncementDto(AnnouncementDto announcementDto) {
+    public static CreateAnnouncementDto fromAnnouncement(Announcement announcement) {
         CreateAnnouncementDto createAnnouncementDto = new CreateAnnouncementDto();
-        createAnnouncementDto.setBody(announcementDto.getBody());
-        createAnnouncementDto.setPrice(announcementDto.getPrice());
+        createAnnouncementDto.setBody(announcement.getBody());
+        createAnnouncementDto.setPrice(announcement.getPrice());
         return createAnnouncementDto;
     }
 
