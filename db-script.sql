@@ -45,7 +45,7 @@ id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 price NUMERIC NOT NULL,
 --rating INT,
-category_id UUID NOT NULL,
+category_id UUID,
 creator_id UUID NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 closed_at TIMESTAMP,
@@ -90,8 +90,8 @@ INSERT INTO category (name) values('bike');
 INSERT INTO category (name) values('auto');
 INSERT INTO category (name) values('bus');
 
-INSERT INTO announcement (body, price, category_id, creator_id) 
-values('ddd', 120, '4baf8dbc-fac4-4ff4-9688-3445599b1ea9', 'a335ff2a-d1e7-41d8-8c98-10b23aca4221');
+INSERT INTO announcement (body, price, creator_id) 
+values('ddd', 120, 'efd14c01-50ff-4cad-a747-a51deb72562b');
 
 
 select * from users;
