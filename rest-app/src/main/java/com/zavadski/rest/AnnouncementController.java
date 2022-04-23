@@ -29,7 +29,7 @@ public class AnnouncementController {
 
         logger.info("get announcement by Id={}", id);
 
-        return AnnouncementDto.fromAnnouncement(announcementService.findById(id));
+        return AnnouncementDto.fromAnnouncement(announcementService.findAnnouncementById(id));
     }
 
     @PostMapping(path = "/announcements")
@@ -38,7 +38,7 @@ public class AnnouncementController {
 
         logger.info("create Announcement ({})", createAnnouncementDto);
 
-        return announcementService.save(createAnnouncementDto.toAnnouncement());
+        return announcementService.createAnnouncement(createAnnouncementDto.toAnnouncement());
     }
 
 }

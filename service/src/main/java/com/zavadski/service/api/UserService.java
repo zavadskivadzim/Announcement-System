@@ -7,18 +7,18 @@ import java.util.UUID;
 
 public interface UserService {
 
-    List<User> findAll();
+    List<User> findAllUsers();
 
-    User findById(UUID id);
+    User findUserById(UUID id);
 
-    User update(User user);
+    User updateUser(User user);
 
-    void delete(UUID id);
+    void deleteUser(UUID id);
 
     User register(User user);
 
-    User findByLogin(String login);
+    User findUserByLogin(String login);
 
-    User findByLoginAndPassword(String login, String password);
+    User findUserByLoginAndPassword(String login, String password);
 
 }

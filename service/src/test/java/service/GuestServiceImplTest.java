@@ -42,7 +42,7 @@ class GuestServiceImplTest {
 
         when(userDao.findAll()).thenReturn(userEntities);
 
-        List<User> expectedRoles = userService.findAll();
+        List<User> expectedRoles = userService.findAllUsers();
 
         assertNotNull(expectedRoles);
         assertEquals(1, expectedRoles.size());

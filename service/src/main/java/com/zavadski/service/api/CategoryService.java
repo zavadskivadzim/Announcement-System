@@ -7,13 +7,13 @@ import java.util.UUID;
 
 public interface CategoryService {
 
-    List<Category> findAll();
+    List<Category> findAllCategories();
 
-    Category save(Category category);
+    Category createCategory(Category category);
 
-    Category findById(UUID id);
+    Category findCategoryById(UUID id);
 
-    Category update(Category category);
+    Category updateCategory(Category category);
 
-    void delete(UUID id);
+    void deleteCategory(UUID id);
 }

@@ -27,7 +27,7 @@ public class RoleController {
 
         logger.info("find All Roles");
 
-        return roleService.findAll()
+        return roleService.findAllRoles()
                 .stream().map(RoleDto::fromRole).collect(Collectors.toList());
     }
 

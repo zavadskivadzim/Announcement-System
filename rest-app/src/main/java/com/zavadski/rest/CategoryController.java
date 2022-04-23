@@ -30,7 +30,7 @@ public class CategoryController {
 
         logger.info("find All Categories");
 
-        return categoryService.findAll()
+        return categoryService.findAllCategories()
                 .stream().map(CategoryDto::fromCategory).collect(Collectors.toList());
     }
 
@@ -39,7 +39,7 @@ public class CategoryController {
 
         logger.info("get Category By Id={}", id);
 
-        return CategoryDto.fromCategory(categoryService.findById(UUID.fromString(id)));
+        return CategoryDto.fromCategory(categoryService.findCategoryById(UUID.fromString(id)));
     }
 
     @PostMapping(path = "admin/categories")
@@ -48,7 +48,7 @@ public class CategoryController {
 
         logger.info("create Category ({})", category);
 
-        categoryService.save(category.toCategory());
+        categoryService.createCategory(category.toCategory());
     }
 
     @PutMapping(value = "admin/categories")
@@ -57,7 +57,7 @@ public class CategoryController {
 
         logger.info("update Category {}", category);
 
-        return categoryService.update(category.toCategory());
+        return categoryService.updateCategory(category.toCategory());
     }
 
     @DeleteMapping(value = "admin/categories/{id}")
@@ -66,6 +66,6 @@ public class CategoryController {
 
         logger.info("delete Category by id={}", id);
 
-        categoryService.delete(id);
+        categoryService.deleteCategory(id);
     }
 }

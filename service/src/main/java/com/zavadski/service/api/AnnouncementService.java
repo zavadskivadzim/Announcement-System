@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public interface AnnouncementService {
 
-    Announcement findById(UUID id);
+    Announcement findAnnouncementById(UUID id);
 
-    Announcement save(Announcement announcement);
+    Announcement createAnnouncement(Announcement announcement);
 
     //    List<Category> findAll();
 

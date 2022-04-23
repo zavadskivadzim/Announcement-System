@@ -1,8 +1,6 @@
 package com.zavadski.rest;
 
-import com.zavadski.model.Category;
 import com.zavadski.model.User;
-import com.zavadski.model.dto.CategoryDto;
 import com.zavadski.model.dto.UserDto;
 import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -33,7 +31,7 @@ public class UserController {
 
         logger.info("find All Users");
 
-        return userService.findAll()
+        return userService.findAllUsers()
                 .stream().map(UserDto::fromUser).collect(Collectors.toList());
     }
 
@@ -42,7 +40,7 @@ public class UserController {
 
         logger.info("get user By Id={}", id);
 
-        return UserDto.fromUser(userService.findById(id));
+        return UserDto.fromUser(userService.findUserById(id));
     }
 
     @PutMapping(value = "/users")
@@ -51,7 +49,7 @@ public class UserController {
 
         logger.info("update User {}", userDto);
 
-        return userService.update(userDto.toUser());
+        return userService.updateUser(userDto.toUser());
     }
 
     @Secured("ROLE_ADMIN")
@@ -61,6 +59,6 @@ public class UserController {
 
         logger.info("delete User by id={}", id);
 
-        userService.delete(id);
+        userService.deleteUser(id);
     }
 }

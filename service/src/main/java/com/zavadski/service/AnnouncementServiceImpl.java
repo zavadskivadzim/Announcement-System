@@ -24,13 +24,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public Announcement findById(UUID id) {
+    public Announcement findAnnouncementById(UUID id) {
         return announcementDao.findById(id);
     }
 
     @Override
-    public Announcement save(Announcement announcement) {
-        User author = userService.findByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+    public Announcement createAnnouncement(Announcement announcement) {
+        User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         announcement.setUser(author);
         return announcementDao.save(announcement);
     }

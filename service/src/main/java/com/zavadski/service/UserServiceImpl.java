@@ -26,18 +26,18 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         return userDao.findAll();
     }
 
     @Override
-    public User findById(UUID id) {
+    public User findUserById(UUID id) {
         return userDao.findById(id);
     }
 
     @Override
-    public User update(User user) {
-        User currentUser = findByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+    public User updateUser(User user) {
+        User currentUser = findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         user.setLogin(currentUser.getLogin());
         user.setPassword(currentUser.getPassword());
         user.setRole(currentUser.getRole());
@@ -45,13 +45,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(UUID id) {
+    public void deleteUser(UUID id) {
         userDao.delete(id);
     }
 
     @Override
     public User register(User user) {
-        Role userRole = findAll().isEmpty()
+        Role userRole = findAllUsers().isEmpty()
                 ?(roleDao.findByName("ROLE_ADMIN"))
                 :(roleDao.findByName("ROLE_USER"));
         user.setRole(userRole);
@@ -60,12 +60,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findUserByLogin(String login) {
         return userDao.findByLogin(login);
     }
 
-    public User findByLoginAndPassword(String login, String password) {
-        User user = findByLogin(login);
+    @Override
+    public User findUserByLoginAndPassword(String login, String password) {
+        User user = findUserByLogin(login);
         if (user != null) {
             if (passwordEncoder.matches(password, user.getPassword())) {
                 return user;
