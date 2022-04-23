@@ -40,8 +40,7 @@ public class CategoryController {
 
         logger.info("get Category By Id={}", id);
 
-        Category category = categoryService.findById(UUID. fromString(id));
-        return CategoryDto.fromCategory(category);
+        return CategoryDto.fromCategory(categoryService.findById(UUID.fromString(id)));
     }
 
     @PostMapping(path = "/categories")

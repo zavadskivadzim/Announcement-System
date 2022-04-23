@@ -43,8 +43,7 @@ public class AnnouncementController {
 
         logger.info("get announcement by Id={}", id);
 
-        Announcement announcement = announcementService.findById(id);
-        return AnnouncementDto.fromAnnouncement(announcement);
+        return AnnouncementDto.fromAnnouncement(announcementService.findById(id));
     }
 
     @PostMapping(path = "/announcements")

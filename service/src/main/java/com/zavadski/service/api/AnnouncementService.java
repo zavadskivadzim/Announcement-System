@@ -1,6 +1,7 @@
 package com.zavadski.service.api;
 
 import com.zavadski.model.Announcement;
+import com.zavadski.model.dto.AnnouncementDto;
 import com.zavadski.model.dto.CreateAnnouncementDto;
 
 import java.util.List;

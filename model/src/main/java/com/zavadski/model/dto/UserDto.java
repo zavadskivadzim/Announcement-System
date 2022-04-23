@@ -15,7 +15,6 @@ public class UserDto {
     private LocalDate birthday;
     private String email;
 
-
     public User toUser() {
         User user = new User();
         user.setId(id);
