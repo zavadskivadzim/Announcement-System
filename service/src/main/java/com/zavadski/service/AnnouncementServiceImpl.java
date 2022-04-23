@@ -3,8 +3,6 @@ package com.zavadski.service;
 import com.zavadski.dao.api.AnnouncementDao;
 import com.zavadski.model.Announcement;
 import com.zavadski.model.User;
-import com.zavadski.model.dto.AnnouncementDto;
-import com.zavadski.model.dto.CreateAnnouncementDto;
 import com.zavadski.service.api.AnnouncementService;
 import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +29,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public Announcement save(CreateAnnouncementDto createAnnouncementDto) {
-        Announcement announcement = createAnnouncementDto.toAnnouncement();
+    public Announcement save(Announcement announcement) {
         User author = userService.findByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         announcement.setUser(author);
         return announcementDao.save(announcement);

@@ -3,7 +3,6 @@ package com.zavadski.dao;
 import com.zavadski.dao.api.AnnouncementDao;
 import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.Announcement;
-import com.zavadski.model.Category;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
