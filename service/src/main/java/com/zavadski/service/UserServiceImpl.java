@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -36,6 +37,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(User user) {
+        User currentUser = findByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+        user.setLogin(currentUser.getLogin());
+        user.setPassword(currentUser.getPassword());
+        user.setRole(currentUser.getRole());
         return userDao.update(user);
     }
 
@@ -46,12 +51,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(User user) {
-
-        Role userRole = roleDao.findByName("ROLE_USER");
+        Role userRole = findAll().isEmpty()
+                ?(roleDao.findByName("ROLE_ADMIN"))
+                :(roleDao.findByName("ROLE_USER"));
         user.setRole(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
-
     }
 
     @Override

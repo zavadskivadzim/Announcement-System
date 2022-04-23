@@ -7,3 +7,15 @@ Run terminal command in project directory:
 To start Rest server (rest-app module):
 ```
 java -jar ./rest-app/target/rest-app-1.0-SNAPSHOT.jar
+```
+
+
+update User:
+
+    {
+        "id": "",
+        "firstName": "",
+        "surname": "",
+        "birthday": "xxxx-xx-xx",
+        "email": ""
+    }

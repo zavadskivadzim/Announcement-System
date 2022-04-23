@@ -25,7 +25,7 @@ public class AuthController {
         user.setPassword(registrationRequest.getPassword());
         user.setLogin(registrationRequest.getLogin());
         userService.register(user);
-        return "OK";
+        return "User is successfully registered";
     }
 
     @PostMapping("/auth")
