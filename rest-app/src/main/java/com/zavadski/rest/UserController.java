@@ -39,8 +39,7 @@ public class UserController {
 
         logger.info("get Role By Id={}", id);
 
-        User user = userService.findById(id);
-        return UserDto.fromUser(user);
+        return UserDto.fromUser(userService.findById(id));
     }
 //
 //    @PostMapping(path = "/roles")

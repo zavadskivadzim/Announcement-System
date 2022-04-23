@@ -3,6 +3,7 @@ package com.zavadski.service;
 import com.zavadski.dao.api.AnnouncementDao;
 import com.zavadski.model.Announcement;
 import com.zavadski.model.User;
+import com.zavadski.model.dto.AnnouncementDto;
 import com.zavadski.model.dto.CreateAnnouncementDto;
 import com.zavadski.service.api.AnnouncementService;
 import com.zavadski.service.api.UserService;
@@ -34,7 +35,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         Announcement announcement = createAnnouncementDto.toAnnouncement();
         User author = userService.findByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         announcement.setUser(author);
-        System.out.println(announcement);
         return announcementDao.save(announcement);
     }
 
