@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class CategoryController {
         return CategoryDto.fromCategory(categoryService.findById(UUID.fromString(id)));
     }
 
-    @PostMapping(path = "/categories")
+    @PostMapping(path = "admin/categories")
     @ResponseStatus(HttpStatus.CREATED)
     public final void createCategory(@RequestBody CategoryDto category) {
 
@@ -52,7 +51,7 @@ public class CategoryController {
         categoryService.save(category.toCategory());
     }
 
-    @PutMapping(value = "/categories")
+    @PutMapping(value = "admin/categories")
     @ResponseStatus(HttpStatus.OK)
     public final Category updateCategory(@RequestBody CategoryDto category) {
 
@@ -61,8 +60,7 @@ public class CategoryController {
         return categoryService.update(category.toCategory());
     }
 
-    @Secured("ROLE_ADMIN")
-    @DeleteMapping(value = "/categories/{id}")
+    @DeleteMapping(value = "admin/categories/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCategory(@PathVariable UUID id) {
 
