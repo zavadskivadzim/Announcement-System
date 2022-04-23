@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,12 +51,6 @@ public class UserServiceImpl implements UserService {
         user.setRole(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
-//        Role roleUser = roleDao.findByName("ROLE_USER");
-//        List<Role> userRoles = new ArrayList<>();
-//        userRoles.add(roleUser);
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setRoles(userRoles);
-//        return userDao.save(user);
 
     }
 

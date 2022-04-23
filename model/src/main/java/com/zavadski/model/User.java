@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -43,11 +42,6 @@ public class User {
     @Column
     private String email;
 
-    //    @ManyToMany (fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_role",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;

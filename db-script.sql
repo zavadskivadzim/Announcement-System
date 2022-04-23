@@ -32,15 +32,7 @@ role_id UUID,
 FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
---CREATE TABLE users (
---id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
---login VARCHAR(50) NOT NULL UNIQUE,
---password VARCHAR(200) NOT NULL,
---role_id INT,
---FOREIGN KEY (role_id) REFERENCES roles(id)
---);
-
-CREATE TABLE announcement ( 
+CREATE TABLE announcement (
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 price NUMERIC NOT NULL,
@@ -74,15 +66,6 @@ FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 );
 
---CREATE TABLE user_role (
---user_id UUID NOT NULL,
---role_id UUID NOT NULL,
---primary key (user_id, role_id),
---FOREIGN KEY (user_id) REFERENCES users(id),
---FOREIGN KEY (role_id) REFERENCES roles(id)
---);
-
-
 INSERT INTO roles (name) values('ROLE_ADMIN');
 INSERT INTO roles (name) values('ROLE_USER');
 
@@ -92,7 +75,6 @@ INSERT INTO category (name) values('bus');
 
 INSERT INTO announcement (body, price, creator_id) 
 values('ddd', 120, 'efd14c01-50ff-4cad-a747-a51deb72562b');
-
 
 select * from users;
 select * from roles;

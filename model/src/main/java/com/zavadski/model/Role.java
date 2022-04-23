@@ -3,7 +3,6 @@ package com.zavadski.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -22,10 +21,6 @@ public class Role {
 
     @Column
     private String name;
-
-//    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    private List<User> users;
 
     @Override
     public boolean equals(Object o) {

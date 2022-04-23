@@ -1,6 +1,5 @@
 package com.zavadski.rest;
 
-import com.zavadski.model.User;
 import com.zavadski.model.dto.UserDto;
 import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -41,24 +40,6 @@ public class UserController {
 
         return UserDto.fromUser(userService.findById(id));
     }
-//
-//    @PostMapping(path = "/roles")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public final void createOrder(@RequestBody UserDto role) {
-//
-//        logger.info("create Role ({})", role);
-//
-//        userService.save(mappingDto.mapToUser(role));
-//    }
-//
-//    @PutMapping(value = "/roles")
-//    @ResponseStatus(HttpStatus.OK)
-//    public final User updateUser(@RequestBody UserDto user) {
-//
-//        logger.info("update User {}", user);
-//
-//        return userService.save(mappingDto.mapToUser(user));
-//    }
 
     @DeleteMapping(value = "/users/{id}")
     @ResponseStatus(HttpStatus.OK)

@@ -24,15 +24,6 @@ public class AnnouncementController {
         this.announcementService = announcementService;
     }
 
-//    @GetMapping(value = "/announcements")
-//    public final List<CategoryDto> findAllCategory() {
-//
-//        logger.info("find All Categories");
-//
-//        return categoryService.findAll()
-//                .stream().map(CategoryDto::fromCategory).collect(Collectors.toList());
-//    }
-
     @GetMapping(value = "/announcements/{id}")
     public final AnnouncementDto getAnnouncementById(@PathVariable UUID id) {
 
@@ -50,28 +41,4 @@ public class AnnouncementController {
         return announcementService.save(createAnnouncementDto.toAnnouncement());
     }
 
-//    @PostMapping
-//    public EventDto createEvent(@RequestBody CreateEventDto createEventDto,
-//                                @RequestHeader("${request.id}") Long id) {
-//        return eventService.createEvent(createEventDto, id);
-//    }
-//
-//    @PutMapping(value = "/categories")
-//    @ResponseStatus(HttpStatus.OK)
-//    public final Category updateCategory(@RequestBody CategoryDto category) {
-//
-//        logger.info("update Category {}", category);
-//
-//        return categoryService.update(category.toCategory());
-//    }
-//
-//    @Secured("ROLE_ADMIN")
-//    @DeleteMapping(value = "/categories/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public void deleteCategory(@PathVariable UUID id) {
-//
-//        logger.info("delete Category by id={}", id);
-//
-//        categoryService.delete(id);
-//    }
 }

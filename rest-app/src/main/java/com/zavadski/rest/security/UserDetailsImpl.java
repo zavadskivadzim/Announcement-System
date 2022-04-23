@@ -22,11 +22,6 @@ public class UserDetailsImpl implements UserDetails {
         userDetails.grantedAuthorities = Collections.singletonList(
                 new SimpleGrantedAuthority(user.getRole().getName()));
 
-//        userDetails.grantedAuthorities = user.getRoles().stream()
-//                .map(role ->
-//                        new SimpleGrantedAuthority(role.getName())
-//                ).collect(Collectors.toList());
-
         return userDetails;
     }
 
