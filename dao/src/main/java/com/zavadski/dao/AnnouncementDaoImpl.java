@@ -72,5 +72,17 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
         return announcement;
     }
 
+    @Override
+    public void delete(UUID id) {
+
+        logger.info("Delete announcement by id={}", id);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Announcement announcement = session.get(Announcement.class, id);
+        session.delete(announcement);
+        session.getTransaction().commit();
+        session.close();
+    }
 
 }

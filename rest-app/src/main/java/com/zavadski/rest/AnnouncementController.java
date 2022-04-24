@@ -4,6 +4,7 @@ import com.zavadski.model.Announcement;
 import com.zavadski.model.dto.AnnouncementDto;
 import com.zavadski.model.dto.CreateAnnouncementDto;
 import com.zavadski.service.api.AnnouncementService;
+import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ import java.util.stream.Collectors;
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
+    private final UserService userService;
 
     private static final Logger logger = LogManager.getLogger(AnnouncementController.class);
 
     @Autowired
-    public AnnouncementController(AnnouncementService announcementService) {
+    public AnnouncementController(AnnouncementService announcementService, UserService userService) {
         this.announcementService = announcementService;
+        this.userService = userService;
     }
 
     @GetMapping(value = "/announcements")
@@ -61,5 +64,21 @@ public class AnnouncementController {
         return announcementService.updateAnnouncement(createAnnouncementDto);
     }
 
+    @DeleteMapping(value = "/announcements/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAnnouncement(@PathVariable UUID id) throws Exception {
 
+        logger.info("delete Announcement by id={}", id);
+
+        announcementService.deleteAnnouncement(id);
+    }
+
+    @GetMapping(value = "/announcements/mine")
+    public final List<AnnouncementDto> findMyAnnouncements() {
+
+        logger.info("find My Announcements");
+
+        return announcementService.findMyAnnouncements()
+                .stream().map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
+    }
 }

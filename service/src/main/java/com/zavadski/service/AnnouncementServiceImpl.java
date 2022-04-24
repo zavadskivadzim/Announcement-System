@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
@@ -33,6 +34,16 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     @Override
     public List<Announcement> findAllAnnouncements() {
         return announcementDao.findAll();
+    }
+
+    @Override
+    public List<Announcement> findMyAnnouncements() {
+
+        User currentUser = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+        return announcementDao.findAll().stream()
+                .filter(announcement -> announcement.getUser()
+                        .equals((currentUser)))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -69,4 +80,15 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         }
     }
 
+    @Override
+    public void deleteAnnouncement(UUID id) throws Exception {
+
+        Announcement announcement = findAnnouncementById(id);
+        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(announcement.getUser())) {
+            announcementDao.delete(id);
+        } else {
+            throw new Exception("you can't delete this announcement");
+        }
+    }
 }

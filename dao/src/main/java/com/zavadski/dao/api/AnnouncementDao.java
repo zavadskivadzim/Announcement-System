@@ -15,4 +15,6 @@ public interface AnnouncementDao {
 
     Announcement update(Announcement announcement);
 
+    void delete(UUID id);
+
 }
