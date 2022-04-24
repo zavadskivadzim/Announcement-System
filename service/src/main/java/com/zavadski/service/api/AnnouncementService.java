@@ -11,9 +11,9 @@ public interface AnnouncementService {
 
     Announcement findAnnouncementById(UUID id);
 
-    Announcement createAnnouncement(Announcement announcement);
+    Announcement createAnnouncement(CreateAnnouncementDto createAnnouncementDto);
 
-    //    List<Category> findAll();
+    List<Announcement> findAllAnnouncements();
 
 //    Category update(Category category);
 //    void delete(UUID id);

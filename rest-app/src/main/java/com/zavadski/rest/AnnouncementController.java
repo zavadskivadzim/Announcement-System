@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 public class AnnouncementController {
@@ -22,6 +24,15 @@ public class AnnouncementController {
     @Autowired
     public AnnouncementController(AnnouncementService announcementService) {
         this.announcementService = announcementService;
+    }
+
+    @GetMapping(value = "/announcements")
+    public final List<AnnouncementDto> findAllAnnouncements() {
+
+        logger.info("find All Announcements");
+
+        return announcementService.findAllAnnouncements()
+                .stream().map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
     }
 
     @GetMapping(value = "/announcements/{id}")
@@ -38,7 +49,7 @@ public class AnnouncementController {
 
         logger.info("create Announcement ({})", createAnnouncementDto);
 
-        return announcementService.createAnnouncement(createAnnouncementDto.toAnnouncement());
+        return announcementService.createAnnouncement(createAnnouncementDto);
     }
 
 }

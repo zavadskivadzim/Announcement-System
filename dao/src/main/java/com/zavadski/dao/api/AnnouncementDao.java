@@ -2,9 +2,12 @@ package com.zavadski.dao.api;
 
 import com.zavadski.model.Announcement;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface AnnouncementDao {
+
+    List<Announcement> findAll();
 
     Announcement findById(UUID id);
 
