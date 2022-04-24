@@ -3,7 +3,6 @@ package com.zavadski.service;
 import com.zavadski.dao.api.AnnouncementDao;
 import com.zavadski.model.Announcement;
 import com.zavadski.model.User;
-import com.zavadski.model.dto.AnnouncementDto;
 import com.zavadski.model.dto.CreateAnnouncementDto;
 import com.zavadski.model.enumeration.Status;
 import com.zavadski.service.api.AnnouncementService;
