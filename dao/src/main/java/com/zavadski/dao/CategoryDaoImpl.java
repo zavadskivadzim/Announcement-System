@@ -1,6 +1,7 @@
 package com.zavadski.dao;
 
 import com.zavadski.dao.api.CategoryDao;
+import com.zavadski.dao.exception.UnacceptableName;
 import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.Category;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
+
+import static com.zavadski.model.constants.Constants.CATEGORY_NAME_SIZE;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
@@ -34,6 +37,12 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category save(Category category) {
 
         logger.info("Create category {}", category);
+
+        if (category.getName().length() > CATEGORY_NAME_SIZE) {
+            logger.warn("Category name is too long {}", category.getName().length());
+            throw new UnacceptableName("Category name must be no more than "
+                    + CATEGORY_NAME_SIZE + " characters long");
+        }
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
@@ -62,6 +71,12 @@ public class CategoryDaoImpl implements CategoryDao {
     public Category update(Category category) {
 
         logger.info("Update category {}", category);
+
+        if (category.getName().length() > CATEGORY_NAME_SIZE) {
+            logger.warn("Category name is too long {}", category.getName().length());
+            throw new UnacceptableName("Category name must be no more than "
+                    + CATEGORY_NAME_SIZE + " characters long");
+        }
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
