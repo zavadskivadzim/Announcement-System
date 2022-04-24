@@ -54,12 +54,19 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto) {
+    public Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto) throws Exception {
+
         Announcement announcement = findAnnouncementById(createAnnouncementDto.getId());
-        announcement.setBody(createAnnouncementDto.getBody());
-        announcement.setPrice(createAnnouncementDto.getPrice());
-        announcement.setCategory(categoryService.findCategoryById(createAnnouncementDto.getCategory()));
-        return announcementDao.update(announcement);
+
+        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(announcement.getUser())) {
+            announcement.setBody(createAnnouncementDto.getBody());
+            announcement.setPrice(createAnnouncementDto.getPrice());
+            announcement.setCategory(categoryService.findCategoryById(createAnnouncementDto.getCategory()));
+            return announcementDao.update(announcement);
+        } else {
+            throw new Exception("you can't update this announcement");
+        }
     }
 
 }

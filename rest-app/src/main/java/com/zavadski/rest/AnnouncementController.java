@@ -54,7 +54,7 @@ public class AnnouncementController {
 
     @PutMapping(path = "/announcements")
     @ResponseStatus(HttpStatus.OK)
-    public final Announcement updateAnnouncement(@RequestBody CreateAnnouncementDto createAnnouncementDto) {
+    public final Announcement updateAnnouncement(@RequestBody CreateAnnouncementDto createAnnouncementDto) throws Exception {
 
         logger.info("update Announcement ({})", createAnnouncementDto);
 

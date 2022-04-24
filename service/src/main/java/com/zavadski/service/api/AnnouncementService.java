@@ -13,7 +13,7 @@ public interface AnnouncementService {
 
     Announcement createAnnouncement(CreateAnnouncementDto createAnnouncementDto);
 
-    Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto);
+    Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto) throws Exception;
 
     List<Announcement> findAllAnnouncements();
 
