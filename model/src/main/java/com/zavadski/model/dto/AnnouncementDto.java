@@ -5,7 +5,6 @@ import com.zavadski.model.Category;
 import com.zavadski.model.enumeration.Status;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 

@@ -13,6 +13,8 @@ public interface AnnouncementService {
 
     Announcement createAnnouncement(CreateAnnouncementDto createAnnouncementDto);
 
+    Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto);
+
     List<Announcement> findAllAnnouncements();
 
 //    Category update(Category category);

@@ -58,4 +58,19 @@ public class AnnouncementDaoImpl implements AnnouncementDao {
         return announcement;
     }
 
+    @Override
+    public Announcement update(Announcement announcement) {
+
+        logger.info("Update announcement {}", announcement);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        session.update(announcement);
+        session.getTransaction().commit();
+        session.close();
+
+        return announcement;
+    }
+
+
 }

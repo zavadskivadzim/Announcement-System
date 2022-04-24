@@ -54,4 +54,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         return announcementDao.save(announcement);
     }
 
+    @Override
+    public Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto) {
+        Announcement announcement = findAnnouncementById(createAnnouncementDto.getId());
+        announcement.setBody(createAnnouncementDto.getBody());
+        announcement.setPrice(createAnnouncementDto.getPrice());
+        announcement.setCategory(categoryService.findCategoryById(createAnnouncementDto.getCategory()));
+        return announcementDao.update(announcement);
+    }
+
 }

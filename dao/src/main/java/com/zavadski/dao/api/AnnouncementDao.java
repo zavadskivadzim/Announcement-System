@@ -13,4 +13,6 @@ public interface AnnouncementDao {
 
     Announcement save(Announcement announcement);
 
+    Announcement update(Announcement announcement);
+
 }

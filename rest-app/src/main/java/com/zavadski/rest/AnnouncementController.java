@@ -52,4 +52,14 @@ public class AnnouncementController {
         return announcementService.createAnnouncement(createAnnouncementDto);
     }
 
+    @PutMapping(path = "/announcements")
+    @ResponseStatus(HttpStatus.OK)
+    public final Announcement updateAnnouncement(@RequestBody CreateAnnouncementDto createAnnouncementDto) {
+
+        logger.info("update Announcement ({})", createAnnouncementDto);
+
+        return announcementService.updateAnnouncement(createAnnouncementDto);
+    }
+
+
 }
