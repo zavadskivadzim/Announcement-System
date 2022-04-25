@@ -99,4 +99,6 @@ values(10, '044ee757-8b09-414e-a2c4-7e952fb5a6e3', 'f3705439-804c-456c-8d84-f959
 INSERT INTO grade (grade, sender_id, receiver_id) 
 values(8, '96b2d3c2-7a28-4651-949f-8793e7023f4c', 'f3705439-804c-456c-8d84-f959b4f1b79b');
 
+select u.id, u.first_name, u.surname, avg(g.grade) from Users u LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id  
+
 
