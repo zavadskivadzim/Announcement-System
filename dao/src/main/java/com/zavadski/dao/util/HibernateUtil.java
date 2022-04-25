@@ -1,9 +1,6 @@
 package com.zavadski.dao.util;
 
-import com.zavadski.model.Announcement;
-import com.zavadski.model.Category;
-import com.zavadski.model.Role;
-import com.zavadski.model.User;
+import com.zavadski.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -18,6 +15,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(User.class)
                 .addAnnotatedClass(Category.class)
                 .addAnnotatedClass(Announcement.class)
+                .addAnnotatedClass(Grade.class)
                 .buildSessionFactory();
     }
 
