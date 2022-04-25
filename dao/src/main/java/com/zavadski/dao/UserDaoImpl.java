@@ -3,9 +3,11 @@ package com.zavadski.dao;
 import com.zavadski.dao.api.UserDao;
 import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.User;
+import com.zavadski.model.dto.UserWithAvgGradeDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -25,6 +27,25 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         List<User> users = session.createQuery("from User", User.class).getResultList();
+        session.getTransaction().commit();
+        session.close();
+
+        return users;
+    }
+
+    @Override
+    public List<UserWithAvgGradeDto> findAllUsersWithAvgGrade() {
+
+        logger.info("Get all users");
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        String hql = "select new UserWithAvgGradeDto(id, firstName, surname) from User u";
+
+//        "select new Summary(a, b, c) FROM A a, B b, C c"
+
+//        String hql = "select u.id as id, u.firstName as firstName, u.surname as surname, avg(g.grade) as grade from User u LEFT JOIN com.zavadski.model.Grade g ON u.id = g.receiver GROUP BY u.id";
+        List<UserWithAvgGradeDto> users = session.createQuery(hql, UserWithAvgGradeDto.class).getResultList();
         session.getTransaction().commit();
         session.close();
 

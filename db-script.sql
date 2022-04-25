@@ -88,14 +88,15 @@ INSERT INTO category (name) values('bus');
 INSERT INTO announcement (body, price, creator_id) 
 values('ddd', 120, 'efd14c01-50ff-4cad-a747-a51deb72562b');
 
-select * from users;
 select * from roles;
+select * from users;
 select * from category;
 select * from announcement;
 select * from grade;
 
 INSERT INTO grade (grade, sender_id, receiver_id) 
-values(10, 'efd14c01-50ff-4cad-a747-a51deb72562b', '9bd422f9-d902-448a-881d-a3685fd7c066');
-
+values(10, '044ee757-8b09-414e-a2c4-7e952fb5a6e3', 'f3705439-804c-456c-8d84-f959b4f1b79b');
+INSERT INTO grade (grade, sender_id, receiver_id) 
+values(8, '96b2d3c2-7a28-4651-949f-8793e7023f4c', 'f3705439-804c-456c-8d84-f959b4f1b79b');
 
 

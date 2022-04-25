@@ -1,6 +1,7 @@
 package com.zavadski.dao.api;
 
 import com.zavadski.model.User;
+import com.zavadski.model.dto.UserWithAvgGradeDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,6 +9,8 @@ import java.util.UUID;
 public interface UserDao {
 
     List<User> findAll();
+
+    List<UserWithAvgGradeDto> findAllUsersWithAvgGrade();
 
     User save(User user);
 

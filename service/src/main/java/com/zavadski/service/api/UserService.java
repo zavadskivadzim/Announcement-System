@@ -1,6 +1,7 @@
 package com.zavadski.service.api;
 
 import com.zavadski.model.User;
+import com.zavadski.model.dto.UserWithAvgGradeDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -8,6 +9,8 @@ import java.util.UUID;
 public interface UserService {
 
     List<User> findAllUsers();
+
+    List<UserWithAvgGradeDto> findAllUsersWithAvgGrade();
 
     User findUserById(UUID id);
 
