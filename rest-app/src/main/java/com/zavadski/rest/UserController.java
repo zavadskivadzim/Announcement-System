@@ -2,7 +2,7 @@ package com.zavadski.rest;
 
 import com.zavadski.model.User;
 import com.zavadski.model.dto.UserDto;
-import com.zavadski.model.dto.UserWithAvgGradeDto;
+import com.zavadski.model.dto.UserWithRating;
 import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,12 +36,12 @@ public class UserController {
                 .stream().map(UserDto::fromUser).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/users_grade")
-    public final List<UserWithAvgGradeDto> findAllUsersWithAvgGrade() {
+    @GetMapping(value = "/users_rating")
+    public final List<UserWithRating> findAllUsersWithRating() {
 
-        logger.info("find All Users With Avg Grade");
+        logger.info("find All Users With Rating");
 
-        return userService.findAllUsersWithAvgGrade();
+        return userService.findAllUsersWithRating();
 
     }
 

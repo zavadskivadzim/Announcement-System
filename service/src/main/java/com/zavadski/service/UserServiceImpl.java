@@ -4,7 +4,7 @@ import com.zavadski.dao.api.RoleDao;
 import com.zavadski.dao.api.UserDao;
 import com.zavadski.model.Role;
 import com.zavadski.model.User;
-import com.zavadski.model.dto.UserWithAvgGradeDto;
+import com.zavadski.model.dto.UserWithRating;
 import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserWithAvgGradeDto> findAllUsersWithAvgGrade(){
-        return userDao.findAllUsersWithAvgGrade();
+    public List<UserWithRating> findAllUsersWithRating(){
+        return userDao.findAllUsersWithRating();
     }
 
     @Override
