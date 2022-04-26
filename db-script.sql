@@ -85,8 +85,8 @@ INSERT INTO category (name) values('bike');
 INSERT INTO category (name) values('car');
 INSERT INTO category (name) values('bus');
 
-INSERT INTO announcement (body, price, creator_id) 
-values('ddd', 120, 'efd14c01-50ff-4cad-a747-a51deb72562b');
+INSERT INTO announcement (body, price, category_id, creator_id) 
+values('ddd', 120, '6277b89e-32f0-40da-b4e1-52027613a83a', 'f3705439-804c-456c-8d84-f959b4f1b79b');
 
 select * from roles;
 select * from users;
@@ -95,10 +95,12 @@ select * from announcement;
 select * from grade;
 
 INSERT INTO grade (grade, sender_id, receiver_id) 
-values(9, 'efd14c01-50ff-4cad-a747-a51deb72562b', '9bd422f9-d902-448a-881d-a3685fd7c066');
+values(7, 'f3705439-804c-456c-8d84-f959b4f1b79b', '96b2d3c2-7a28-4651-949f-8793e7023f4c');
 INSERT INTO grade (grade, sender_id, receiver_id) 
-values(8, '9bd422f9-d902-448a-881d-a3685fd7c066', 'efd14c01-50ff-4cad-a747-a51deb72562b');
+values(8, '96b2d3c2-7a28-4651-949f-8793e7023f4c', 'f3705439-804c-456c-8d84-f959b4f1b79b');
 
-select u.id, u.first_name, u.surname, avg(g.grade) from Users u LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id  
+select u.id, u.first_name, u.surname, avg(g.grade) from Users u LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id ;
 
+select a.id, a.body, a.price from Announcement a LEFT outer JOIN category c ON a.category_id = c.id;
 
+select a.id, a.body, a.price from Announcement a LEFT outer JOIN category c ON a.category_id = c.id WHERE c.name = 'auto';
