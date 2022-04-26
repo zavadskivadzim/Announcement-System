@@ -19,8 +19,13 @@ public class AnnouncementByFilterServiceImpl implements AnnouncementByFilterServ
     }
 
     @Override
-    public List<AnnouncementByFilterDto> findAnnouncementsByFilter(String category) {
-        return announcementDao.findAnnouncementByFilter(category);
+    public List<AnnouncementByFilterDto> filterAnnouncementsByCategory(String category) {
+        return announcementDao.filterAnnouncementsByCategory(category);
+    }
+
+    @Override
+    public List<AnnouncementByFilterDto> filterAnnouncementsByPrice (Integer maxPrice) {
+        return announcementDao.filterAnnouncementsByPrice(maxPrice);
     }
 
 }

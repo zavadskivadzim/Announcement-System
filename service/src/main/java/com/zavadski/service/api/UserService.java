@@ -1,7 +1,6 @@
 package com.zavadski.service.api;
 
 import com.zavadski.model.User;
-import com.zavadski.model.dto.UserWithRating;
 
 import java.util.List;
 import java.util.UUID;
@@ -9,8 +8,6 @@ import java.util.UUID;
 public interface UserService {
 
     List<User> findAllUsers();
-
-    List<UserWithRating> findAllUsersWithRating();
 
     User findUserById(UUID id);
 

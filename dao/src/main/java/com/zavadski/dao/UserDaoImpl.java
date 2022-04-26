@@ -3,7 +3,6 @@ package com.zavadski.dao;
 import com.zavadski.dao.api.UserDao;
 import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.User;
-import com.zavadski.model.dto.UserWithRating;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -26,24 +25,6 @@ public class UserDaoImpl implements UserDao {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         List<User> users = session.createQuery("from User", User.class).getResultList();
-        session.getTransaction().commit();
-        session.close();
-
-        return users;
-    }
-
-    @Override
-    public List<UserWithRating> findAllUsersWithRating() {
-
-        logger.info("Get all users");
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-
-        String hql = "select new com.zavadski.model.dto.UserWithAvgGradeDto (u.id, u.firstName, u.surname, avg(g.grade))" +
-                " from User u INNER JOIN Grade g ON u.id = g.receiver GROUP BY u.id";
-
-        List<UserWithRating> users = session.createQuery(hql, UserWithRating.class).getResultList();
         session.getTransaction().commit();
         session.close();
 

@@ -6,6 +6,8 @@ import com.zavadski.model.dto.AnnouncementByFilterDto;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,23 +17,43 @@ public class AnnouncementByFilterDaoImpl implements AnnouncementByFilterDao {
 
     private final Logger logger = LogManager.getLogger(AnnouncementByFilterDaoImpl.class);
 
-    @Override
-    public List<AnnouncementByFilterDto> findAnnouncementByFilter(String category) {
+    @Value("${FILTER_ANNOUNCEMENT_BY_CATEGORY}")
+    private String announcementsByCategorySql;
 
-        logger.info("Get all Announcements");
+    @Value("${FILTER_ANNOUNCEMENT_BY_PRICE}")
+    private String announcementsByPriceSql;
+
+    @Override
+    public List<AnnouncementByFilterDto> filterAnnouncementsByCategory(String category) {
+
+        logger.info("filter Announcements By Category {}", category);
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-
-        String hql = "select new com.zavadski.model.dto.AnnouncementDto2 (a.id, a.body, a.price)" +
-                " from Announcement a INNER JOIN Grade g ON a.user = g.receiver Order BY g.grade";
-
-        List<AnnouncementByFilterDto> announcementByFilterDtos = session.createQuery(hql, AnnouncementByFilterDto.class).getResultList();
-
+        Query query = session.createQuery(announcementsByCategorySql, AnnouncementByFilterDto.class);
+        query.setParameter("category", category);
+        List<AnnouncementByFilterDto> announcements = query.getResultList();
         session.getTransaction().commit();
         session.close();
 
-        return announcementByFilterDtos;
+        return announcements;
     }
+
+    @Override
+    public List<AnnouncementByFilterDto> filterAnnouncementsByPrice(Integer maxPrice) {
+
+        logger.info("filter Announcements By Price {}", maxPrice);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Query query = session.createQuery(announcementsByPriceSql, AnnouncementByFilterDto.class);
+        query.setParameter("maxPrice", maxPrice);
+        List<AnnouncementByFilterDto> announcements = query.getResultList();
+        session.getTransaction().commit();
+        session.close();
+
+        return announcements;
+    }
+
 
 }

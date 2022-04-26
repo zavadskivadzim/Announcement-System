@@ -13,22 +13,27 @@ import java.util.List;
 @RestController
 public class AnnouncementByFilterController {
 
-    private final AnnouncementByFilterService announcementService;
+    private final AnnouncementByFilterService announcementByFilterService;
 
     private static final Logger logger = LogManager.getLogger(AnnouncementController.class);
 
     @Autowired
-    public AnnouncementByFilterController(AnnouncementByFilterService announcementService) {
-        this.announcementService = announcementService;
+    public AnnouncementByFilterController(AnnouncementByFilterService announcementByFilterService) {
+        this.announcementByFilterService = announcementByFilterService;
     }
 
-    @GetMapping(value = "/announcements")
-    public final List<AnnouncementByFilterDto> findAnnouncementByFilter(@RequestParam(value = "category", required = false)
-                                                                     String category) {
+    @GetMapping(value = "/announcements/filter")
+    public final List<AnnouncementByFilterDto> findAnnouncementsByFilter(
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "maxPrice", required = false) Integer maxPrice) {
 
-        logger.info("find All Announcements");
+        logger.info("filter Announcements");
 
-        return announcementService.findAnnouncementsByFilter(category);
+        if (category != null) {
+            return announcementByFilterService.filterAnnouncementsByCategory(category);
+        } else if (maxPrice != null) {
+            return announcementByFilterService.filterAnnouncementsByPrice(maxPrice);
+        } else
+            return null;
     }
-
 }
