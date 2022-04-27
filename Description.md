@@ -41,7 +41,7 @@ POST:
     {
         "body": "dark car",
         "price": "190",
-        "category": ""
+        "category": "car"
     }
 -----------------------------------------------------------------------------
 **create Category**
@@ -60,4 +60,19 @@ PUT:
     {
         "id": "06a939bf-f72b-48b4-a510-74d5e2fd9c7e",
         "name": "bike"
+    }
+
+-----------------------------------------------------------------------------
+**find All Comments**
+
+    localhost:8088/admin/comments
+
+**create Comment**
+
+    localhost:8088/comments
+POST:
+
+    {
+        "body": "comment",
+        "announcement": "6ad5b920-1c36-4336-bc3a-17e020c17823"
     }

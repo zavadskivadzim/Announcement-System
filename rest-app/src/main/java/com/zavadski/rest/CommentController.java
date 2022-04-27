@@ -23,7 +23,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping(value = "/comments")
+    @GetMapping(value = "/admin/comments")
     public final List<CommentDto> findAllComments() {
 
         logger.info("find All Comments");
