@@ -11,7 +11,7 @@ import java.util.UUID;
 @Data
 public class AnnouncementDto {
 
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     private String body;
     private Integer price;
     private Category category;

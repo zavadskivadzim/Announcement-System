@@ -8,7 +8,7 @@ import java.util.UUID;
 @Data
 public class CategoryDto {
 
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     private String name;
 
     public Category toCategory() {

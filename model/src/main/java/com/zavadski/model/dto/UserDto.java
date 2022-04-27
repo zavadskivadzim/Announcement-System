@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 public class UserDto {
 
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     private String firstName;
     private String surname;
     private LocalDate birthday;

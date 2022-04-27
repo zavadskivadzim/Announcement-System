@@ -8,7 +8,7 @@ import java.util.UUID;
 @Data
 public class RoleDto {
 
-    private UUID id = UUID.randomUUID();
+    private UUID id;
     private String name;
 
     public Role toRole() {
