@@ -27,4 +27,12 @@ public class CommentDto {
         return commentDto;
     }
 
+    public Comment toComment() {
+        Comment comment = new Comment();
+        comment.setId(id);
+        comment.setBody(body);
+        comment.setAnnouncement(announcementDto.toAnnouncement());
+        return comment;
+    }
+
 }

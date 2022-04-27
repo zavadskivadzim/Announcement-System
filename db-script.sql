@@ -60,7 +60,8 @@ FOREIGN KEY (receiver_id) REFERENCES users(id)
 CREATE TABLE comment ( 
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
-commented_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+date_of_creating TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+date_of_editing TIMESTAMP,
 sender_id UUID,
 announcement_id UUID,
 FOREIGN KEY (sender_id) REFERENCES users(id),
@@ -93,11 +94,15 @@ select * from users;
 select * from category;
 select * from announcement;
 select * from grade;
+select * from comment;
 
 INSERT INTO grade (grade, sender_id, receiver_id) 
 values(7, 'f3705439-804c-456c-8d84-f959b4f1b79b', '96b2d3c2-7a28-4651-949f-8793e7023f4c');
 INSERT INTO grade (grade, sender_id, receiver_id) 
 values(8, '96b2d3c2-7a28-4651-949f-8793e7023f4c', 'f3705439-804c-456c-8d84-f959b4f1b79b');
+
+insert into comment (body, sender_id, announcement_id)
+values ('comment1', '044ee757-8b09-414e-a2c4-7e952fb5a6e3', '6ad5b920-1c36-4336-bc3a-17e020c17823');
 
 select u.id, u.first_name, u.surname, avg(g.grade) from Users u LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id ;
 

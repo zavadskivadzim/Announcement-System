@@ -1,7 +1,6 @@
 package com.zavadski.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zavadski.model.enumeration.Status;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 

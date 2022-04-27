@@ -1,6 +1,5 @@
 package com.zavadski.rest;
 
-import com.zavadski.model.Comment;
 import com.zavadski.model.dto.*;
 import com.zavadski.service.api.CommentService;
 import org.apache.logging.log4j.LogManager;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,6 +30,15 @@ public class CommentController {
 
         return commentService.findAllComments()
                 .stream().map(CommentDto::fromComment).collect(Collectors.toList());
+    }
+
+    @PostMapping(path = "/comments")
+    @ResponseStatus(HttpStatus.CREATED)
+    public final void createComment(@RequestBody CreateCommentDto createCommentDto) {
+
+        logger.info("create Comment ({})", createCommentDto);
+
+        commentService.createComment(createCommentDto);
     }
 
 }
