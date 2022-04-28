@@ -1,6 +1,5 @@
 package com.zavadski.rest;
 
-import com.zavadski.model.User;
 import com.zavadski.model.dto.UserDto;
 import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -26,7 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/admin/users")
     public final List<UserDto> findAllUsers() {
 
         logger.info("find All Users");
@@ -45,15 +44,15 @@ public class UserController {
 
     @PutMapping(value = "/users")
     @ResponseStatus(HttpStatus.OK)
-    public final User updateUser(@RequestBody UserDto userDto) {
+    public final void updateUser(@RequestBody UserDto userDto) {
 
         logger.info("update User {}", userDto);
 
-        return userService.updateUser(userDto.toUser());
+        userService.updateUser(userDto.toUser());
     }
 
     @Secured("ROLE_ADMIN")
-    @DeleteMapping(value = "/users/{id}")
+    @DeleteMapping(value = "/admin/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable UUID id) {
 

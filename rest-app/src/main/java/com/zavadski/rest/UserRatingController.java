@@ -21,7 +21,7 @@ public class UserRatingController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/users_rating")
+    @GetMapping(value = "/admin/users_rating")
     public final List<UserWithRating> findAllUsersWithRating() {
 
         logger.info("find All Users With Rating");

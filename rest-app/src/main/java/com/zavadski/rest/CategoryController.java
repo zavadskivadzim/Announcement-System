@@ -42,7 +42,7 @@ public class CategoryController {
         return CategoryDto.fromCategory(categoryService.findCategoryById(UUID.fromString(id)));
     }
 
-    @PostMapping(path = "admin/categories")
+    @PostMapping(path = "/admin/categories")
     @ResponseStatus(HttpStatus.CREATED)
     public final void createCategory(@RequestBody CategoryDto category) {
 
@@ -51,7 +51,7 @@ public class CategoryController {
         categoryService.createCategory(category.toCategory());
     }
 
-    @PutMapping(value = "admin/categories")
+    @PutMapping(value = "/admin/categories")
     @ResponseStatus(HttpStatus.OK)
     public final Category updateCategory(@RequestBody CategoryDto category) {
 
@@ -60,7 +60,7 @@ public class CategoryController {
         return categoryService.updateCategory(category.toCategory());
     }
 
-    @DeleteMapping(value = "admin/categories/{id}")
+    @DeleteMapping(value = "/admin/categories/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteCategory(@PathVariable UUID id) {
 

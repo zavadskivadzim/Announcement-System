@@ -22,7 +22,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @GetMapping(value = "/roles")
+    @GetMapping(value = "/admin/roles")
     public final List<RoleDto> findAllRoles() {
 
         logger.info("find All Roles");

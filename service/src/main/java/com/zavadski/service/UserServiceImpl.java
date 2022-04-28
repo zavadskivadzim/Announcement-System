@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(User user) {
         User currentUser = findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+        user.setId(currentUser.getId());
         user.setLogin(currentUser.getLogin());
         user.setPassword(currentUser.getPassword());
         user.setRole(currentUser.getRole());
