@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface AnnouncementByFilterService {
 
-    List<AnnouncementByFilterDto> filterAnnouncementsByCategory(String category);
-
-    List<AnnouncementByFilterDto> filterAnnouncementsByPrice(Integer maxPrice);
+    List<AnnouncementByFilterDto> filterAnnouncementsByCategory(String category, Integer maxPrice, Integer minPrice);
 
 }

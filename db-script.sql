@@ -110,6 +110,6 @@ LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id ;
 select a.id, a.body, a.price, avg(g.grade) from Announcement a 
 LEFT outer JOIN category c ON a.category_id = c.id 
 left outer join Grade g ON a.creator_id = g.receiver_id
-WHERE c.name = 'car' 
+WHERE c.name = 'car' and a.price < 200
 GROUP BY a.id
 order by avg(g.grade) DESC;

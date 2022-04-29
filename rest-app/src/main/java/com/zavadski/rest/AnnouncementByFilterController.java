@@ -25,15 +25,10 @@ public class AnnouncementByFilterController {
     @GetMapping(value = "/announcements/filter")
     public final List<AnnouncementByFilterDto> findAnnouncementsByFilter(
             @RequestParam(value = "category", required = false) String category,
-            @RequestParam(value = "maxPrice", required = false) Integer maxPrice) {
+            @RequestParam(value = "maxPrice", required = false) Integer maxPrice,
+            @RequestParam(value = "minPrice", required = false) Integer minPrice) {
 
-        logger.info("filter Announcements");
-
-        if (category != null) {
-            return announcementByFilterService.filterAnnouncementsByCategory(category);
-        } else if (maxPrice != null) {
-            return announcementByFilterService.filterAnnouncementsByPrice(maxPrice);
-        } else
-            return null;
+        logger.info("filter announcements");
+        return announcementByFilterService.filterAnnouncementsByCategory(category, maxPrice, minPrice);
     }
 }
