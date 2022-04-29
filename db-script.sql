@@ -37,13 +37,14 @@ CREATE TABLE announcement (
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 price NUMERIC NOT NULL,
---rating INT,
 category_id UUID NOT NULL,
 creator_id UUID NOT NULL,
+customer_id UUID,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 closed_at TIMESTAMP,
 status VARCHAR(50) DEFAULT 'ACTIVE',
 FOREIGN KEY (creator_id) REFERENCES users(id),
+FOREIGN KEY (customer_id) REFERENCES users(id),
 FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
@@ -113,3 +114,8 @@ left outer join Grade g ON a.creator_id = g.receiver_id
 WHERE c.name = 'car' and a.price < 200
 GROUP BY a.id
 order by avg(g.grade) DESC;
+
+ALTER TABLE announcement 
+ADD customer_id UUID 
+ALTER TABLE announcement 
+ADD constraint fk FOREIGN KEY (customer_id) REFERENCES users(id);
