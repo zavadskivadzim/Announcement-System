@@ -50,4 +50,8 @@ public class Announcement {
     @Column(name = "status")
     private Status status;
 
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private User customer;
+
 }

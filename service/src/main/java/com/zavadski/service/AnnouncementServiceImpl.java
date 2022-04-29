@@ -92,4 +92,32 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         }
     }
 
+    @Override
+    public List<Announcement> findAnnouncementsHistory() {
+
+        User currentUser = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+        return announcementDao.findAll().stream()
+                .filter(announcement -> announcement.getUser().equals((currentUser))
+                        && announcement.getStatus().name().equals("SOLD"))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void buy(UUID uuid) {
+
+        if (!userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(findAnnouncementById(uuid).getUser())) {
+            //todo
+            Announcement announcement = findAnnouncementById(uuid);
+            if (announcement.getStatus().equals(Status.ACTIVE)) {
+                announcement.setDateOfClosing(LocalDateTime.now());
+                announcement.setStatus(Status.SOLD);
+                announcement.setCustomer(userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin())));
+                announcementDao.update(announcement);
+            } else {
+                //todo
+            }
+        }
+    }
+
 }

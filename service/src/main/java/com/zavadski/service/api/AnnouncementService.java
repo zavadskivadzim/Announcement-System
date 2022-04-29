@@ -20,4 +20,8 @@ public interface AnnouncementService {
 
     void deleteAnnouncement(UUID id) throws Exception;
 
+    void buy(UUID uuid);
+
+    List<Announcement> findAnnouncementsHistory();
+
 }

@@ -1,9 +1,11 @@
 package com.zavadski.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zavadski.model.Announcement;
 import com.zavadski.model.Category;
 import com.zavadski.model.enumeration.Status;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,7 +18,11 @@ public class AnnouncementDto {
     private Integer price;
     private Category category;
     private UserDto userDto;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
     private LocalDateTime dateOfCreating;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
     private LocalDateTime dateOfClosing;
     private Status status;
 

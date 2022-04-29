@@ -2,6 +2,7 @@ package com.zavadski.rest;
 
 import com.zavadski.model.Announcement;
 import com.zavadski.model.dto.AnnouncementDto;
+import com.zavadski.model.dto.AnnouncementHistory;
 import com.zavadski.model.dto.CreateAnnouncementDto;
 import com.zavadski.service.api.AnnouncementService;
 import org.apache.logging.log4j.LogManager;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -77,6 +79,26 @@ public class AnnouncementController {
 
         return announcementService.findMyAnnouncements()
                 .stream().map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
+    }
+
+    @PutMapping(value = "/selling")
+    @ResponseStatus(HttpStatus.OK)
+    public final void selling(@RequestBody UUID uuid) {
+
+        logger.info("selling {}", uuid);
+
+        announcementService.buy(uuid);
+    }
+
+    @GetMapping(value = "/announcements_history")
+    public final List<AnnouncementHistory> findAnnouncementsHistory() {
+
+        logger.info("find Announcements History");
+
+        return announcementService.findAnnouncementsHistory()
+                .stream()
+                .sorted(Comparator.comparing(Announcement::getDateOfClosing).reversed())
+                .map(AnnouncementHistory::fromAnnouncement).collect(Collectors.toList());
     }
 
 }
