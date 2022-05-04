@@ -81,9 +81,9 @@ public class AnnouncementController {
                 .stream().map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
     }
 
-    @PutMapping(value = "/selling")
+    @PutMapping(value = "/buy")
     @ResponseStatus(HttpStatus.OK)
-    public final void selling(@RequestBody UUID uuid) {
+    public final void buy(@RequestBody UUID uuid) {
 
         logger.info("selling {}", uuid);
 
