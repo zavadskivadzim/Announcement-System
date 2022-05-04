@@ -7,7 +7,8 @@ import java.util.UUID;
 @Data
 public class CreateCommentDto {
 
+    private UUID id;
     private String body;
-    private UUID announcementId;
+    private UUID announcement;
 
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -35,6 +36,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Comment findCommentById(UUID id) {
+        return commentDao.findById(id);
+    }
+
+    @Override
     public Comment createComment(CreateCommentDto createCommentDto) {
         Comment comment = new Comment();
         User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
@@ -44,6 +50,31 @@ public class CommentServiceImpl implements CommentService {
         comment.setBody(createCommentDto.getBody());
         comment.setDateOfCreating(LocalDateTime.now());
         return commentDao.save(comment);
+    }
+
+    @Override
+    public Comment updateComment(CreateCommentDto createCommentDto) throws Exception {
+        Comment comment = findCommentById(createCommentDto.getId());
+        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(comment.getUser())) {
+            comment.setBody(createCommentDto.getBody());
+            comment.setDateOfEditing(LocalDateTime.now());
+            return commentDao.update(comment);
+        } else {
+            throw new Exception("you can't update this announcement");
+        }
+    }
+
+    @Override
+    public void deleteComment(UUID id) throws Exception {
+
+        Comment comment = findCommentById(id);
+        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(comment.getUser())) {
+            commentDao.delete(id);
+        } else {
+            throw new Exception("you can't delete this comment");
+        }
     }
 
 }
