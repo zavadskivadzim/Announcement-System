@@ -8,6 +8,6 @@ import java.util.UUID;
 public class CreateCommentDto {
 
     private String body;
-    private UUID announcement;
+    private UUID announcementId;
 
 }

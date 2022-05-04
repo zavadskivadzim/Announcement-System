@@ -28,7 +28,7 @@ public class AnnouncementController {
         this.announcementService = announcementService;
     }
 
-    @GetMapping(value = "/announcements")
+    @GetMapping(value = "/admin/announcements")
     public final List<AnnouncementDto> findAllAnnouncements() {
 
         logger.info("find All Announcements");

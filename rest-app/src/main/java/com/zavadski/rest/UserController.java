@@ -51,7 +51,6 @@ public class UserController {
         userService.updateUser(userDto.toUser());
     }
 
-    @Secured("ROLE_ADMIN")
     @DeleteMapping(value = "/admin/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable UUID id) {
