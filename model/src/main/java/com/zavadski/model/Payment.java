@@ -16,8 +16,8 @@ import java.util.UUID;
 @Setter
 @ToString
 @RequiredArgsConstructor
-@Table(name = "paid")
-public class Paid {
+@Table(name = "payment")
+public class Payment {
 
     @Id
     @Column(name = "id")

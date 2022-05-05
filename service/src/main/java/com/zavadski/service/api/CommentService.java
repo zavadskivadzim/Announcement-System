@@ -12,9 +12,9 @@ public interface CommentService {
 
     Comment findCommentById(UUID id);
 
-    Comment createComment(CreateCommentDto createCommentDto);
+    void createComment(CreateCommentDto createCommentDto);
 
-    Comment updateComment(CreateCommentDto createCommentDto) throws Exception;
+    void updateComment(CreateCommentDto createCommentDto) throws Exception;
 
     void deleteComment(UUID id) throws Exception;
 

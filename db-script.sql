@@ -70,7 +70,7 @@ FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 );
 
-CREATE TABLE paid ( 
+CREATE TABLE payment ( 
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 paid_from TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 paid_to TIMESTAMP,
@@ -121,7 +121,7 @@ LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id ;
 select a.id, a.body, a.price, avg(g.grade) from Announcement a 
 LEFT outer JOIN category c ON a.category_id = c.id 
 left outer join Grade g ON a.creator_id = g.receiver_id 
-left outer join paid p ON a.id = p.announcement_id 
+left outer join payment p ON a.id = p.announcement_id 
 WHERE c.name = 'car' and a.price < 1000
 and a.status = 'ACTIVE'
 GROUP BY a.id, p.paid_from, p.paid_to

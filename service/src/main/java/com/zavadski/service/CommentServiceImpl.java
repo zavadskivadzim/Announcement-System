@@ -41,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment createComment(CreateCommentDto createCommentDto) {
+    public void createComment(CreateCommentDto createCommentDto) {
         Comment comment = new Comment();
         User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         Announcement announcement = announcementService.findAnnouncementById(createCommentDto.getAnnouncement());
@@ -49,17 +49,17 @@ public class CommentServiceImpl implements CommentService {
         comment.setAnnouncement(announcement);
         comment.setBody(createCommentDto.getBody());
         comment.setDateOfCreating(LocalDateTime.now());
-        return commentDao.save(comment);
+        commentDao.save(comment);
     }
 
     @Override
-    public Comment updateComment(CreateCommentDto createCommentDto) throws Exception {
+    public void updateComment(CreateCommentDto createCommentDto) throws Exception {
         Comment comment = findCommentById(createCommentDto.getId());
         if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
                 .equals(comment.getUser())) {
             comment.setBody(createCommentDto.getBody());
             comment.setDateOfEditing(LocalDateTime.now());
-            return commentDao.update(comment);
+            commentDao.update(comment);
         } else {
             throw new Exception("you can't update this announcement");
         }
