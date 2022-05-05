@@ -10,8 +10,6 @@ public interface AnnouncementService {
 
     List<Announcement> findAllAnnouncements();
 
-    List<Announcement> findMyAnnouncements();
-
     Announcement findAnnouncementById(UUID id);
 
     Announcement createAnnouncement(CreateAnnouncementDto createAnnouncementDto);
@@ -21,7 +19,5 @@ public interface AnnouncementService {
     void deleteAnnouncement(UUID id) throws Exception;
 
     void buy(UUID uuid);
-
-    List<Announcement> findAnnouncementsHistory();
 
 }

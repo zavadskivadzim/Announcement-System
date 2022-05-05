@@ -1,10 +1,13 @@
 package com.zavadski.rest;
 
 import com.zavadski.model.Announcement;
+import com.zavadski.model.User;
 import com.zavadski.model.dto.AnnouncementDto;
 import com.zavadski.model.dto.AnnouncementHistory;
 import com.zavadski.model.dto.CreateAnnouncementDto;
+import com.zavadski.service.CurrentUserService;
 import com.zavadski.service.api.AnnouncementService;
+import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,12 +24,14 @@ import java.util.stream.Collectors;
 public class AnnouncementController {
 
     private final AnnouncementService announcementService;
+    private final UserService userService;
 
     private static final Logger logger = LogManager.getLogger(AnnouncementController.class);
 
     @Autowired
-    public AnnouncementController(AnnouncementService announcementService) {
+    public AnnouncementController(AnnouncementService announcementService, UserService userService) {
         this.announcementService = announcementService;
+        this.userService = userService;
     }
 
     @GetMapping(value = "/admin/announcements")
@@ -77,8 +83,11 @@ public class AnnouncementController {
 
         logger.info("find My Announcements");
 
-        return announcementService.findMyAnnouncements()
-                .stream().map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
+        return announcementService.findAllAnnouncements()
+                .stream()
+                .filter(announcement -> announcement.getUser()
+                        .equals(userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))))
+                .map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
     }
 
     @PutMapping(value = "/buy")
@@ -95,8 +104,12 @@ public class AnnouncementController {
 
         logger.info("find Announcements History");
 
-        return announcementService.findAnnouncementsHistory()
+        User currentUser = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+
+        return announcementService.findAllAnnouncements()
                 .stream()
+                .filter(announcement -> announcement.getUser().equals((currentUser))
+                        && announcement.getStatus().name().equals("SOLD"))
                 .sorted(Comparator.comparing(Announcement::getDateOfClosing).reversed())
                 .map(AnnouncementHistory::fromAnnouncement).collect(Collectors.toList());
     }

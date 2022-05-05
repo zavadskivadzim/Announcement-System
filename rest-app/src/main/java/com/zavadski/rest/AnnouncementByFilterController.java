@@ -28,6 +28,6 @@ public class AnnouncementByFilterController {
             @RequestParam(value = "minPrice", required = false) Integer minPrice) {
 
         logger.info("filter announcements");
-        return announcementByFilterService.filterAnnouncementsByCategory(category, maxPrice, minPrice);
+        return announcementByFilterService.filterAnnouncements(category, maxPrice, minPrice);
     }
 }

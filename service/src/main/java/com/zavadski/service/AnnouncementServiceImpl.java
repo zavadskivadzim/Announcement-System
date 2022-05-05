@@ -37,16 +37,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public List<Announcement> findMyAnnouncements() {
-
-        User currentUser = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
-        return announcementDao.findAll().stream()
-                .filter(announcement -> announcement.getUser()
-                        .equals((currentUser)))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public Announcement findAnnouncementById(UUID id) {
         return announcementDao.findById(id);
     }
@@ -90,16 +80,6 @@ public class AnnouncementServiceImpl implements AnnouncementService {
         } else {
             throw new Exception("you can't delete this announcement");
         }
-    }
-
-    @Override
-    public List<Announcement> findAnnouncementsHistory() {
-
-        User currentUser = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
-        return announcementDao.findAll().stream()
-                .filter(announcement -> announcement.getUser().equals((currentUser))
-                        && announcement.getStatus().name().equals("SOLD"))
-                .collect(Collectors.toList());
     }
 
     @Override

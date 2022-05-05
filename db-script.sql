@@ -1,5 +1,6 @@
 --CREATE DATABASE Announcement-System;
 
+DROP TABLE IF EXISTS paid;
 DROP TABLE IF EXISTS grade;
 DROP TABLE IF EXISTS message;
 DROP TABLE IF EXISTS comment;
@@ -69,9 +70,17 @@ FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (announcement_id) REFERENCES announcement(id)
 );
 
+CREATE TABLE paid ( 
+id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+paid_from TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+paid_to TIMESTAMP,
+announcement_id UUID,
+FOREIGN KEY (announcement_id) REFERENCES announcement(id)
+);
+
 CREATE TABLE grade ( 
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-grade SMALLINT CHECK (grade between 0 and 10 ),
+grade SMALLINT CHECK (grade between 0 and 10),
 sender_id UUID,
 receiver_id UUID,
 FOREIGN KEY (sender_id) REFERENCES users(id),
@@ -95,6 +104,7 @@ select * from users;
 select * from category;
 select * from announcement;
 select * from grade;
+select * from paid;
 select * from comment;
 
 INSERT INTO grade (grade, sender_id, receiver_id) 
@@ -110,12 +120,19 @@ LEFT JOIN Grade g ON u.id = g.receiver_id  GROUP BY u.id ;
 
 select a.id, a.body, a.price, avg(g.grade) from Announcement a 
 LEFT outer JOIN category c ON a.category_id = c.id 
-left outer join Grade g ON a.creator_id = g.receiver_id
-WHERE c.name = 'car' and a.price < 200
-GROUP BY a.id
-order by avg(g.grade) DESC;
+left outer join Grade g ON a.creator_id = g.receiver_id 
+left outer join paid p ON a.id = p.announcement_id 
+WHERE c.name = 'car' and a.price < 1000
+and a.status = 'ACTIVE'
+GROUP BY a.id, p.paid_from, p.paid_to
+order by 
+CASE WHEN p.paid_from < CURRENT_TIMESTAMP and p.paid_to > CURRENT_TIMESTAMP THEN p.paid_to end asc,
+avg(g.grade) desc;
 
-ALTER TABLE announcement 
-ADD customer_id UUID 
-ALTER TABLE announcement 
-ADD constraint fk FOREIGN KEY (customer_id) REFERENCES users(id);
+INSERT INTO paid (announcement_id, paid_to) 
+values('6ad5b920-1c36-4336-bc3a-17e020c17823', '2022-05-06');
+
+
+
+
+
