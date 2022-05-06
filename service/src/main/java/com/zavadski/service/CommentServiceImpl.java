@@ -61,7 +61,7 @@ public class CommentServiceImpl implements CommentService {
             comment.setDateOfEditing(LocalDateTime.now());
             commentDao.update(comment);
         } else {
-            throw new Exception("you can't update this announcement");
+            throw new Exception("you can't update this comment");
         }
     }
 

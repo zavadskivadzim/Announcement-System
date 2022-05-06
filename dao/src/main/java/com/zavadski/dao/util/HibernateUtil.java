@@ -18,6 +18,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(Grade.class)
                 .addAnnotatedClass(Comment.class)
                 .addAnnotatedClass(Payment.class)
+                .addAnnotatedClass(Message.class)
                 .buildSessionFactory();
     }
 

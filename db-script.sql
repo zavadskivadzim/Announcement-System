@@ -53,8 +53,9 @@ CREATE TABLE message (
 id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 body VARCHAR(500) NOT NULL,
 sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+edited_at TIMESTAMP,
 sender_id UUID,
-receiver_id UUID,
+receiver_id UUID NOT NULL,
 FOREIGN KEY (sender_id) REFERENCES users(id),
 FOREIGN KEY (receiver_id) REFERENCES users(id)
 );
@@ -107,6 +108,7 @@ select * from announcement;
 select * from grade;
 select * from payment;
 select * from comment;
+select * from message;
 
 INSERT INTO grade (grade, sender_id, receiver_id) 
 values(7, 'f3705439-804c-456c-8d84-f959b4f1b79b', '96b2d3c2-7a28-4651-949f-8793e7023f4c');
