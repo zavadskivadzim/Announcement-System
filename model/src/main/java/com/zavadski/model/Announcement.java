@@ -53,14 +53,4 @@ public class Announcement {
     @JoinColumn(name = "customer_id")
     private User customer;
 
-    @Column(name = "paid_from")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
-    private LocalDateTime paidFrom;
-
-    @Column(name = "paid_to")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+3")
-    private LocalDateTime paidTo;
-
 }

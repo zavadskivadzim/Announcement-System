@@ -2,27 +2,30 @@ package com.zavadski.service;
 
 import com.zavadski.dao.api.PaymentDao;
 import com.zavadski.model.Payment;
-import com.zavadski.model.User;
+import com.zavadski.model.dto.CreatePaymentDto;
+import com.zavadski.service.api.AnnouncementService;
 import com.zavadski.service.api.PaymentService;
 import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentDao paymentDao;
     private final UserService userService;
+    private final AnnouncementService announcementService;
 
     @Autowired
-    public PaymentServiceImpl(PaymentDao paymentDao, UserService userService) {
+    public PaymentServiceImpl(PaymentDao paymentDao, UserService userService, AnnouncementService announcementService) {
         this.paymentDao = paymentDao;
         this.userService = userService;
+        this.announcementService = announcementService;
     }
 
     @Override
@@ -31,41 +34,17 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment findPaymentById(UUID id) {
-        return paymentDao.findById(id);
-    }
-
-    @Override
-    public Payment createPayment(Payment payment) {
-        User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
-        payment.setAnnouncement(payment.getAnnouncement());
-        payment.setPaidFrom(LocalDateTime.now());
-        payment.setPaidTo(payment.getPaidTo());
-        return paymentDao.save(payment);
-    }
-
-    @Override
-    public Payment updatePayment(Payment payment) throws Exception{
+    public Payment createPayment(CreatePaymentDto createPaymentDto) throws Exception {
 
         if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
-                .equals(payment.getAnnouncement().getUser())) {
-            payment.setPaidTo(payment.getPaidTo());
-            return paymentDao.update(payment);
+                .equals(announcementService.findAnnouncementById(createPaymentDto.getAnnouncementId()).getUser())) {
+            Payment payment = new Payment();
+            payment.setAnnouncement(announcementService.findAnnouncementById(createPaymentDto.getAnnouncementId()));
+            payment.setPaidFrom(LocalDateTime.now());
+            payment.setPaidTo(LocalDateTime.now().plus(Duration.ofDays(createPaymentDto.getDuration())));
+            return paymentDao.save(payment);
         } else {
-            throw new Exception("you can't delete this payment");
-        }
-    }
-
-
-    @Override
-    public void deletePayment(UUID id) throws Exception {
-
-        Payment payment = findPaymentById(id);
-        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
-                .equals(payment.getAnnouncement().getUser())) {
-            paymentDao.delete(id);
-        } else {
-            throw new Exception("you can't delete this payment");
+            throw new Exception("you can't make this payment");
         }
     }
 

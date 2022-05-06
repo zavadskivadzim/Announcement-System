@@ -1,6 +1,7 @@
 package com.zavadski.service.api;
 
 import com.zavadski.model.Grade;
+import com.zavadski.model.dto.CreateGradeDto;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,10 +12,8 @@ public interface GradeService {
 
     Grade findGradeById(UUID id);
 
-    Grade createGrade(Grade grade);
+    Grade createGrade(CreateGradeDto createGradeDto);
 
-    Grade updateGrade(Grade grade) throws Exception;
-
-    void deleteGrade(UUID id) throws Exception;
+    Grade updateGrade(CreateGradeDto createGradeDto);
 
 }

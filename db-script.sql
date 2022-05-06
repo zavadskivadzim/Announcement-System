@@ -1,6 +1,6 @@
 --CREATE DATABASE Announcement-System;
 
-DROP TABLE IF EXISTS paid;
+DROP TABLE IF EXISTS payment;
 DROP TABLE IF EXISTS grade;
 DROP TABLE IF EXISTS message;
 DROP TABLE IF EXISTS comment;
@@ -75,7 +75,8 @@ id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
 paid_from TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 paid_to TIMESTAMP,
 announcement_id UUID,
-FOREIGN KEY (announcement_id) REFERENCES announcement(id)
+FOREIGN KEY (announcement_id) REFERENCES announcement(id),
+unique (announcement_id)
 );
 
 CREATE TABLE grade ( 
@@ -104,7 +105,7 @@ select * from users;
 select * from category;
 select * from announcement;
 select * from grade;
-select * from paid;
+select * from payment;
 select * from comment;
 
 INSERT INTO grade (grade, sender_id, receiver_id) 

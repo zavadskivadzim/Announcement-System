@@ -1,17 +1,14 @@
 package com.zavadski.service;
 
 import com.zavadski.dao.api.GradeDao;
-import com.zavadski.model.Announcement;
 import com.zavadski.model.Grade;
 import com.zavadski.model.User;
-import com.zavadski.model.dto.CreateAnnouncementDto;
-import com.zavadski.model.enumeration.Status;
+import com.zavadski.model.dto.CreateGradeDto;
 import com.zavadski.service.api.GradeService;
 import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -28,7 +25,6 @@ public class GradeServiceImpl implements GradeService {
         this.userService = userService;
     }
 
-
     @Override
     public List<Grade> findAllGrades() {
         return gradeDao.findAll();
@@ -40,37 +36,20 @@ public class GradeServiceImpl implements GradeService {
     }
 
     @Override
-    public Grade createGrade(Grade grade) {
+    public Grade createGrade(CreateGradeDto createGradeDto) {
         User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+        Grade grade = new Grade();
         grade.setSender(author);
-        grade.setReceiver(grade.getReceiver());
-        grade.setGrade(grade.getGrade());
+        grade.setGrade(createGradeDto.getGrade());
+        grade.setReceiver(userService.findUserById(createGradeDto.getReceiverId()));
         return gradeDao.save(grade);
     }
 
     @Override
-    public Grade updateGrade(Grade grade) throws Exception{
-
-        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
-                .equals(grade.getSender())) {
-            grade.setGrade(grade.getGrade());
-            return gradeDao.update(grade);
-        } else {
-            throw new Exception("you can't delete this grade");
-        }
-    }
-
-
-    @Override
-    public void deleteGrade(UUID id) throws Exception {
-
-        Grade grade = findGradeById(id);
-        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
-                .equals(grade.getSender())) {
-            gradeDao.delete(id);
-        } else {
-            throw new Exception("you can't delete this grade");
-        }
+    public Grade updateGrade(CreateGradeDto createGradeDto) {
+        Grade grade = findGradeById(createGradeDto.getId());
+        grade.setGrade(createGradeDto.getGrade());
+        return gradeDao.update(grade);
     }
 
 }
