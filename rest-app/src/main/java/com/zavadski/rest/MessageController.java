@@ -42,7 +42,6 @@ public class MessageController {
     }
 
     @PutMapping(path = "/messages")
-    @ResponseStatus(HttpStatus.OK)
     public final void updateComment(@RequestBody CreateMessageDto createMessageDto) throws Exception {
 
         logger.info("update Message ({})", createMessageDto);
@@ -51,7 +50,6 @@ public class MessageController {
     }
 
     @DeleteMapping(value = "/messages/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteMessage(@PathVariable UUID id) throws Exception {
 
         logger.info("delete Message by id={}", id);

@@ -41,7 +41,6 @@ public class GradeController {
     }
 
     @PutMapping(path = "/grades")
-    @ResponseStatus(HttpStatus.OK)
     public final Grade updateGrade(@RequestBody CreateGradeDto createGradeDto) {
 
         logger.info("update Grade ({})", createGradeDto);

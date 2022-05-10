@@ -43,7 +43,6 @@ public class UserController {
     }
 
     @PutMapping(value = "/users")
-    @ResponseStatus(HttpStatus.OK)
     public final void updateUser(@RequestBody UserDto userDto) {
 
         logger.info("update User {}", userDto);
@@ -52,7 +51,6 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/admin/users/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteUser(@PathVariable UUID id) {
 
         logger.info("delete User by id={}", id);
