@@ -36,13 +36,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
+    public void updateUser(User user) {
         User currentUser = findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         user.setId(currentUser.getId());
         user.setLogin(currentUser.getLogin());
         user.setPassword(currentUser.getPassword());
         user.setRole(currentUser.getRole());
-        return userDao.update(user);
+        userDao.update(user);
     }
 
     @Override
@@ -51,13 +51,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(User user) {
+    public void register(User user) {
         Role userRole = findAllUsers().isEmpty()
                 ?(roleDao.findByName("ROLE_ADMIN"))
                 :(roleDao.findByName("ROLE_USER"));
         user.setRole(userRole);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userDao.save(user);
+        userDao.save(user);
     }
 
     @Override

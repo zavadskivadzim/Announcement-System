@@ -44,11 +44,11 @@ public class CategoryController {
 
     @PostMapping(path = "/admin/categories")
     @ResponseStatus(HttpStatus.CREATED)
-    public final void createCategory(@RequestBody CategoryDto category) {
+    public final Category createCategory(@RequestBody CategoryDto category) {
 
         logger.info("create Category ({})", category);
 
-        categoryService.createCategory(category.toCategory());
+        return categoryService.createCategory(category.toCategory());
     }
 
     @PutMapping(value = "/admin/categories")

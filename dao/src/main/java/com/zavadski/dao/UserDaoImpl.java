@@ -1,6 +1,7 @@
 package com.zavadski.dao;
 
 import com.zavadski.dao.api.UserDao;
+import com.zavadski.dao.exception.UnacceptableName;
 import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.User;
 import org.apache.logging.log4j.LogManager;
@@ -34,10 +35,18 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User save(User user) {
 
-        logger.info("Create user {}", user);
+        logger.info("Create user with login={}", user.getLogin());
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
+
+        if (!checkLoginOnUnique(user.getLogin())) {
+
+            logger.warn("User with the same login {} already exists.", user.getLogin());
+
+            throw new UnacceptableName("User with the same login already exists in DB.");
+        }
+
         session.save(user);
         session.getTransaction().commit();
         session.close();
@@ -101,6 +110,23 @@ public class UserDaoImpl implements UserDao {
         session.close();
 
         return user;
+    }
+
+    @Override
+    public boolean checkLoginOnUnique(String login) {
+
+        logger.info("Check login {} on unique", login);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        String hql = "select count(login) from User where login = :login";
+        Query query = session.createQuery(hql);
+        query.setParameter("login", login);
+        Long result = (Long) query.getResultList().get(0);
+        session.getTransaction().commit();
+        session.close();
+
+        return result == 0;
     }
 
 }

@@ -11,11 +11,11 @@ public interface UserService {
 
     User findUserById(UUID id);
 
-    User updateUser(User user);
+    void updateUser(User user);
 
     void deleteUser(UUID id);
 
-    User register(User user);
+    void register(User user);
 
     User findUserByLogin(String login);
 

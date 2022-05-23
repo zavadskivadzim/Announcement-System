@@ -19,4 +19,6 @@ public interface UserDao {
 
     User findByLogin(String login);
 
+    boolean checkLoginOnUnique(String login);
+
 }
