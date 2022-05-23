@@ -60,7 +60,6 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/admin/categories")
-    @ResponseStatus(HttpStatus.OK)
     public final Category updateCategory(@RequestBody CategoryDto category) {
 
         logger.info("update Category {}", category);
@@ -69,7 +68,6 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/admin/categories/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteCategory(@PathVariable UUID id) {
 
         logger.info("delete Category by id={}", id);

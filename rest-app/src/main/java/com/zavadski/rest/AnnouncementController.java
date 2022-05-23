@@ -61,7 +61,6 @@ public class AnnouncementController {
     }
 
     @PutMapping(path = "/announcements")
-    @ResponseStatus(HttpStatus.OK)
     public final Announcement updateAnnouncement(@RequestBody CreateAnnouncementDto createAnnouncementDto) throws Exception {
 
         logger.info("update Announcement ({})", createAnnouncementDto);
@@ -70,7 +69,6 @@ public class AnnouncementController {
     }
 
     @DeleteMapping(value = "/announcements/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteAnnouncement(@PathVariable UUID id) throws Exception {
 
         logger.info("delete Announcement by id={}", id);
@@ -91,7 +89,6 @@ public class AnnouncementController {
     }
 
     @PutMapping(value = "/buy")
-    @ResponseStatus(HttpStatus.OK)
     public final void buy(@RequestBody UUID uuid) {
 
         logger.info("selling {}", uuid);

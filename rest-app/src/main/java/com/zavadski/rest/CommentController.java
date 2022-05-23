@@ -1,6 +1,5 @@
 package com.zavadski.rest;
 
-import com.zavadski.model.Announcement;
 import com.zavadski.model.Comment;
 import com.zavadski.model.dto.*;
 import com.zavadski.service.api.CommentService;
@@ -46,7 +45,6 @@ public class CommentController {
     }
 
     @PutMapping(path = "/comments")
-    @ResponseStatus(HttpStatus.OK)
     public final void updateComment(@RequestBody CreateCommentDto createCommentDto) throws Exception {
 
         logger.info("update Comment ({})", createCommentDto);
@@ -67,7 +65,6 @@ public class CommentController {
                 .map(CommentDto::fromComment).collect(Collectors.toList());
     }
     @DeleteMapping(value = "/comments/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public void deleteComment(@PathVariable UUID id) throws Exception {
 
         logger.info("delete Comment by id={}", id);
