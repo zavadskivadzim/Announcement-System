@@ -11,6 +11,8 @@ public interface UserService {
 
     User findUserById(UUID id);
 
+    User findCurrentUser();
+
     void updateUser(User user);
 
     void deleteUser(UUID id);

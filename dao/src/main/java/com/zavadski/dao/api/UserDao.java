@@ -13,6 +13,8 @@ public interface UserDao {
 
     User findById(UUID id);
 
+    User findCurrentUser(UUID id);
+
     User update(User user);
 
     void delete(UUID id);

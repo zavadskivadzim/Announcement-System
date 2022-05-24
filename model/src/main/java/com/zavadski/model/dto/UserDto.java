@@ -3,6 +3,7 @@ package com.zavadski.model.dto;
 import com.zavadski.model.User;
 import lombok.Data;
 
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -10,9 +11,13 @@ import java.util.UUID;
 public class UserDto {
 
     private UUID id;
+
+    @Size(max = 50, message = "firstName can't be more then {max} characters long")
     private String firstName;
+    @Size(max = 50, message = "surname can't be more then {max} characters long")
     private String surname;
     private LocalDate birthday;
+    @Size(max = 50, message = "email can't be more then {max} characters long")
     private String email;
 
     public User toUser() {

@@ -61,6 +61,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User findCurrentUser(UUID id) {
+
+        logger.info("Find Current User by id={}", id);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        User user = session.get(User.class, id);
+        session.getTransaction().commit();
+        session.close();
+
+        return user;
+    }
+
+    @Override
     public User update(User user) {
 
         logger.info("Update user {}", user);

@@ -1,11 +1,11 @@
 package com.zavadski.rest;
 
+import com.zavadski.model.User;
 import com.zavadski.model.dto.UserDto;
 import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,20 +33,22 @@ public class UserController {
                 .stream().map(UserDto::fromUser).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/users/{id}")
-    public final UserDto getUserById(@PathVariable UUID id) {
+    @GetMapping(value = "/users/current")
+    public final UserDto getCurrentUser() {
 
-        logger.info("get user By Id={}", id);
+        logger.info("get current user");
+        User user = userService.findCurrentUser();
+        return UserDto.fromUser(user);
 
-        return UserDto.fromUser(userService.findUserById(id));
     }
 
     @PutMapping(value = "/users")
-    public final void updateUser(@RequestBody UserDto userDto) {
+    public final String updateCurrentUser(@RequestBody UserDto userDto) {
 
-        logger.info("update User {}", userDto);
+        logger.info("update Current User {}", userDto);
 
         userService.updateUser(userDto.toUser());
+        return "Your profile successfully updated";
     }
 
     @DeleteMapping(value = "/admin/users/{id}")

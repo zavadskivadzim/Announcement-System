@@ -40,6 +40,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findCurrentUser() {
+        User currentUser = findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+        return userDao.findCurrentUser(currentUser.getId());
+    }
+
+    @Override
     public void updateUser(User user) {
         User currentUser = findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         user.setId(currentUser.getId());
@@ -82,9 +88,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean checkLoginOnUnique(String login){
-
         logger.info("check login={} on unique", login);
-
         return userDao.checkLoginOnUnique(login);
     }
 
