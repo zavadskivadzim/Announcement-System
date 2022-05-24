@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/categories")
-    public final List<CategoryDto> findAllCategory() {
+    public final List<CategoryDto> findAllCategories() {
 
         logger.info("find All Categories");
 
@@ -38,33 +38,43 @@ public class CategoryController {
                 .stream().map(CategoryDto::fromCategory).collect(Collectors.toList());
     }
 
-    @GetMapping(value = "/categories/{id}")
-    public final CategoryDto getCategoryById(@PathVariable String id) {
-
-        logger.info("get Category By Id={}", id);
-
-        return CategoryDto.fromCategory(categoryService.findCategoryById(UUID.fromString(id)));
-    }
-
     @PostMapping(path = "/admin/categories")
     @ResponseStatus(HttpStatus.CREATED)
-    public final Category createCategory(@RequestBody @Valid CategoryDto category, BindingResult result) {
+    public final String createCategory(@RequestBody @Valid CategoryDto category, BindingResult result) {
 
         logger.info("create Category ({})", category);
-
         if (result.hasErrors()) {
             throw new UnacceptableName(Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
         } else {
-            return categoryService.createCategory(category.toCategory());
+            if (!this.categoryService.checkCategoryOnUnique(category.getName())) {
+                logger.warn("Category with name " + category.getName() + " already exists.");
+                throw new UnacceptableName("Category with name " + category.getName() + " already exists.");
+            } else {
+                categoryService.createCategory(category.toCategory());
+                logger.info("Category {} created" + category.getName());
+                return "Category " + category.getName() + " created";
+            }
         }
     }
 
     @PutMapping(value = "/admin/categories")
-    public final Category updateCategory(@RequestBody CategoryDto category) {
+    public final String updateCategory(@RequestBody @Valid CategoryDto category, BindingResult result) {
 
         logger.info("update Category {}", category);
-
-        return categoryService.updateCategory(category.toCategory());
+        if (result.hasErrors()) {
+            throw new UnacceptableName(Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
+        } else {
+            Category updatedCategory = new Category();
+            updatedCategory.setName(categoryService.findCategoryById(category.getId()).getName());
+            if (this.categoryService.checkCategoryOnUnique(category.getName())
+                    || (Objects.equals(category.getName(), updatedCategory.getName()))) {
+                categoryService.updateCategory(category.toCategory());
+                logger.info("Category {} updated to {}", updatedCategory.getName(), category.getName());
+                return "Category " + updatedCategory.getName() + " updated to " + category.getName();
+            } else {
+                throw new UnacceptableName("Category " + category.getName() + " already exists.");
+            }
+        }
     }
 
     @DeleteMapping(value = "/admin/categories/{id}")

@@ -44,4 +44,9 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDao.delete(id);
     }
 
+    @Override
+    public boolean checkCategoryOnUnique(String categoryName) {
+        return categoryDao.checkCategoryOnUnique(categoryName);
+    }
+
 }

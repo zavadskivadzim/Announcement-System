@@ -17,4 +17,6 @@ public interface CategoryService {
 
     void deleteCategory(UUID id);
 
+    boolean checkCategoryOnUnique(String categoryName);
+
 }

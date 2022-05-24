@@ -17,4 +17,6 @@ public interface CategoryDao {
 
     void delete(UUID id);
 
+    boolean checkCategoryOnUnique(String categoryName);
+
 }
