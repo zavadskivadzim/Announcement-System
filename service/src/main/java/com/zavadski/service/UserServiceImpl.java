@@ -5,6 +5,8 @@ import com.zavadski.dao.api.UserDao;
 import com.zavadski.model.Role;
 import com.zavadski.model.User;
 import com.zavadski.service.api.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDao userDao;
@@ -74,6 +78,14 @@ public class UserServiceImpl implements UserService {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean checkLoginOnUnique(String login){
+
+        logger.info("check login={} on unique", login);
+
+        return userDao.checkLoginOnUnique(login);
     }
 
 }

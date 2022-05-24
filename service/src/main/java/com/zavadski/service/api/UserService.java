@@ -21,4 +21,6 @@ public interface UserService {
 
     User findUserByLoginAndPassword(String login, String password);
 
+    boolean checkLoginOnUnique(String login);
+
 }

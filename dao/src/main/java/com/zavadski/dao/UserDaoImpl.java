@@ -39,14 +39,6 @@ public class UserDaoImpl implements UserDao {
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-
-        if (!checkLoginOnUnique(user.getLogin())) {
-
-            logger.warn("User with the same login {} already exists.", user.getLogin());
-
-            throw new UnacceptableName("User with the same login already exists in DB.");
-        }
-
         session.save(user);
         session.getTransaction().commit();
         session.close();
