@@ -9,6 +9,10 @@ To start Rest server (rest-app module):
 java -jar ./rest-app/target/rest-app-1.0-SNAPSHOT.jar
 ``
 -----------------------------------------------------------------------------
+##Postman  
+[https://web.postman.co/workspace/d58acace-cf85-45bf-84b2-383a5bb430e7/collection/18754865-ea1c06a8-e209-492f-b370-58faabcb68a2?action=share&creator=18754865
+](https://web.postman.co/workspace/d58acace-cf85-45bf-84b2-383a5bb430e7/collection/18754865-ea1c06a8-e209-492f-b370-58faabcb68a2?action=share&creator=18754865)
+
 **1.1 - Регистрация пользователя**   
 Первому зарегистрировавшемуся пользователь по умолчанию присваивается роль администратора,  
 все последующим - обычный пользователь
