@@ -56,11 +56,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(UUID id) {
-        userDao.delete(id);
-    }
-
-    @Override
     public void register(User user) {
         Role userRole = findAllUsers().isEmpty()
                 ?(roleDao.findByName("ROLE_ADMIN"))

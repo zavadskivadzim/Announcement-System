@@ -1,5 +1,6 @@
 package com.zavadski.rest.exception;
 
+import com.zavadski.dao.exception.NoAccess;
 import com.zavadski.dao.exception.UnacceptableName;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(value = {UnacceptableName.class})
     public ResponseEntity<String> handleUnacceptableName(Exception ex) {
         return new ResponseEntity<>(String.format("Handle: %s", ex.getMessage()), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(value = {NoAccess.class})
+    public ResponseEntity<String> handleNoAccess(Exception ex) {
+        return new ResponseEntity<>(String.format("Handle: %s", ex.getMessage()), HttpStatus.FORBIDDEN);
     }
 
 }

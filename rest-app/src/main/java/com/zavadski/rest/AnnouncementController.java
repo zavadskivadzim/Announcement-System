@@ -1,5 +1,6 @@
 package com.zavadski.rest;
 
+import com.zavadski.dao.exception.NoAccess;
 import com.zavadski.model.Announcement;
 import com.zavadski.model.User;
 import com.zavadski.model.dto.AnnouncementDto;
@@ -65,7 +66,14 @@ public class AnnouncementController {
 
         logger.info("update Announcement ({})", createAnnouncementDto);
 
-        return announcementService.updateAnnouncement(createAnnouncementDto);
+        Announcement announcement = announcementService.findAnnouncementById(createAnnouncementDto.getId());
+
+        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(announcement.getUser())) {
+            return announcementService.updateAnnouncement(createAnnouncementDto);
+        } else {
+            throw new NoAccess("you can't update this announcement");
+        }
     }
 
     @DeleteMapping(value = "/announcements/{id}")
@@ -73,7 +81,14 @@ public class AnnouncementController {
 
         logger.info("delete Announcement by id={}", id);
 
-        announcementService.deleteAnnouncement(id);
+        Announcement announcement = announcementService.findAnnouncementById(id);
+        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
+                .equals(announcement.getUser())) {
+            announcementService.deleteAnnouncement(id);
+        } else {
+            throw new NoAccess("you can't delete this announcement");
+        }
+
     }
 
     @GetMapping(value = "/announcements/mine")

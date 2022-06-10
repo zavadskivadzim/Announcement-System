@@ -1,7 +1,6 @@
 package com.zavadski.dao;
 
 import com.zavadski.dao.api.UserDao;
-import com.zavadski.dao.exception.UnacceptableName;
 import com.zavadski.dao.util.HibernateUtil;
 import com.zavadski.model.User;
 import org.apache.logging.log4j.LogManager;
@@ -86,19 +85,6 @@ public class UserDaoImpl implements UserDao {
         session.close();
 
         return user;
-    }
-
-    @Override
-    public void delete(UUID id) {
-
-        logger.info("Delete user by id={}", id);
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        User user = session.get(User.class, id);
-        session.delete(user);
-        session.getTransaction().commit();
-        session.close();
     }
 
     @Override

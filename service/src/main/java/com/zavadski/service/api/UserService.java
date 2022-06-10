@@ -15,8 +15,6 @@ public interface UserService {
 
     void updateUser(User user);
 
-    void deleteUser(UUID id);
-
     void register(User user);
 
     User findUserByLogin(String login);

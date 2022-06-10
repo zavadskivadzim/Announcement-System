@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
@@ -43,7 +42,9 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
     @Override
     public Announcement createAnnouncement(CreateAnnouncementDto createAnnouncementDto) {
+
         Announcement announcement = new Announcement();
+
         User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
         announcement.setUser(author);
         announcement.setBody(createAnnouncementDto.getBody());
@@ -55,31 +56,20 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto) throws Exception {
+    public Announcement updateAnnouncement(CreateAnnouncementDto createAnnouncementDto) {
 
         Announcement announcement = findAnnouncementById(createAnnouncementDto.getId());
 
-        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
-                .equals(announcement.getUser())) {
-            announcement.setBody(createAnnouncementDto.getBody());
-            announcement.setPrice(createAnnouncementDto.getPrice());
-            announcement.setCategory(categoryService.findCategoryById(createAnnouncementDto.getCategory()));
-            return announcementDao.update(announcement);
-        } else {
-            throw new Exception("you can't update this announcement");
-        }
+        announcement.setBody(createAnnouncementDto.getBody());
+        announcement.setPrice(createAnnouncementDto.getPrice());
+        announcement.setCategory(categoryService.findCategoryById(createAnnouncementDto.getCategory()));
+        return announcementDao.update(announcement);
     }
 
     @Override
-    public void deleteAnnouncement(UUID id) throws Exception {
+    public void deleteAnnouncement(UUID id) {
 
-        Announcement announcement = findAnnouncementById(id);
-        if (userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()))
-                .equals(announcement.getUser())) {
-            announcementDao.delete(id);
-        } else {
-            throw new Exception("you can't delete this announcement");
-        }
+        announcementDao.delete(id);
     }
 
     @Override

@@ -51,11 +51,4 @@ public class UserController {
         return "Your profile successfully updated";
     }
 
-    @DeleteMapping(value = "/admin/users/{id}")
-    public void deleteUser(@PathVariable UUID id) {
-
-        logger.info("delete User by id={}", id);
-
-        userService.deleteUser(id);
-    }
 }
