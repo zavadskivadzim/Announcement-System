@@ -37,7 +37,9 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade createGrade(CreateGradeDto createGradeDto) {
+
         User author = userService.findUserByLogin(Objects.requireNonNull(CurrentUserService.getCurrentUserLogin()));
+
         Grade grade = new Grade();
         grade.setSender(author);
         grade.setGrade(createGradeDto.getGrade());
@@ -47,6 +49,7 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade updateGrade(CreateGradeDto createGradeDto) {
+
         Grade grade = findGradeById(createGradeDto.getId());
         grade.setGrade(createGradeDto.getGrade());
         return gradeDao.update(grade);
