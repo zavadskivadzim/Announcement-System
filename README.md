@@ -4,9 +4,7 @@ Run terminal command in project directory:
 ``
 mvn clean install
 ``
-
 ### Start Rest application
-
 To start Rest server (rest-app module):  
 ``
 java -jar ./rest-app/target/rest-app-1.0-SNAPSHOT.jar
@@ -22,22 +20,6 @@ java -jar ./rest-app/target/rest-app-1.0-SNAPSHOT.jar
 Первому зарегистрировавшемуся пользователь по умолчанию присваивается роль администратора,  
 все последующим - обычный пользователь
 
-
------------------------------------------------------------------------------
-**15 - Фильтр объявлений**  
-GET:
-
-    localhost:8088/announcements/filter?category=car&maxPrice=200&minPrice=100
-
------------------------------------------------------------------------------
-
-**20 - Покупка товара**
-
-    localhost:8088/buy
-
-PUT:
-
-        "{id}"
 
 -----------------------------------------------------------------------------
 **21 - Просмотр списка всех комментариев**  

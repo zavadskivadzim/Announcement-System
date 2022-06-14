@@ -103,10 +103,10 @@ public class AnnouncementController {
                 .map(AnnouncementDto::fromAnnouncement).collect(Collectors.toList());
     }
 
-    @PutMapping(value = "/buy")
-    public final void buy(@RequestBody UUID uuid) {
+    @GetMapping(value = "/buy/{uuid}")
+    public final void buy(@PathVariable UUID uuid) {
 
-        logger.info("selling {}", uuid);
+        logger.info("buying {}", uuid);
 
         announcementService.buy(uuid);
     }
