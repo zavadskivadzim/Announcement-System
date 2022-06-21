@@ -4,7 +4,10 @@ import com.zavadski.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
+@org.springframework.context.annotation.Configuration
+@PropertySource({"dao.properties"})
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;

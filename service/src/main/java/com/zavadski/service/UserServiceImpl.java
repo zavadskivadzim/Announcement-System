@@ -86,5 +86,4 @@ public class UserServiceImpl implements UserService {
         logger.info("check login={} on unique", login);
         return userDao.checkLoginOnUnique(login);
     }
-
 }
