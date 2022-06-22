@@ -37,7 +37,9 @@ public class AuthController {
         logger.info("Attempt to register a user with a login={}", registrationRequest.getLogin());
 
         if (result.hasErrors()) {
+
             logger.info("Entered data isn't correct: " + Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
+
             throw new UnacceptableName(Objects.requireNonNull(result.getFieldError()).getDefaultMessage());
         } else {
             User user = new User();
