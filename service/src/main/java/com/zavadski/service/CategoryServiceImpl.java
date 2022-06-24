@@ -2,7 +2,6 @@ package com.zavadski.service;
 
 import com.zavadski.dao.api.CategoryDao;
 import com.zavadski.model.Category;
-import com.zavadski.service.api.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

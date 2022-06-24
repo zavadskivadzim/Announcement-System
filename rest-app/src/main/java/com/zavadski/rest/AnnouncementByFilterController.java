@@ -1,7 +1,7 @@
 package com.zavadski.rest;
 
 import com.zavadski.model.dto.AnnouncementByFilterDto;
-import com.zavadski.service.api.AnnouncementByFilterService;
+import com.zavadski.service.AnnouncementByFilterService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,6 @@ package com.zavadski.service;
 
 import com.zavadski.dao.api.RoleDao;
 import com.zavadski.model.Role;
-import com.zavadski.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

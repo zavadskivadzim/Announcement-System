@@ -2,7 +2,7 @@ package com.zavadski.rest;
 
 import com.zavadski.model.Payment;
 import com.zavadski.model.dto.CreatePaymentDto;
-import com.zavadski.service.api.PaymentService;
+import com.zavadski.service.PaymentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

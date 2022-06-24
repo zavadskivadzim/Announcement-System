@@ -5,7 +5,7 @@ import com.zavadski.model.User;
 import com.zavadski.model.security.AuthRequest;
 import com.zavadski.model.security.AuthResponse;
 import com.zavadski.model.security.RegistrationRequest;
-import com.zavadski.service.api.UserService;
+import com.zavadski.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.zavadski.rest;
 
 import com.zavadski.model.dto.RoleDto;
-import com.zavadski.service.api.RoleService;
+import com.zavadski.service.RoleService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

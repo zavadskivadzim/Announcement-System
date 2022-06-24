@@ -1,7 +1,7 @@
 package com.zavadski.rest;
 
 import com.zavadski.model.dto.UserWithRating;
-import com.zavadski.service.api.UserRatingService;
+import com.zavadski.service.UserRatingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

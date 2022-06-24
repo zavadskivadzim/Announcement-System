@@ -3,7 +3,7 @@ package com.zavadski.rest;
 import com.zavadski.dao.exception.UnacceptableName;
 import com.zavadski.model.Category;
 import com.zavadski.model.dto.CategoryDto;
-import com.zavadski.service.api.CategoryService;
+import com.zavadski.service.CategoryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

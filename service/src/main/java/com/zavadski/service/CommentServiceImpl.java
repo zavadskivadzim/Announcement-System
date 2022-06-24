@@ -5,9 +5,6 @@ import com.zavadski.model.Announcement;
 import com.zavadski.model.Comment;
 import com.zavadski.model.User;
 import com.zavadski.model.dto.CreateCommentDto;
-import com.zavadski.service.api.AnnouncementService;
-import com.zavadski.service.api.CommentService;
-import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

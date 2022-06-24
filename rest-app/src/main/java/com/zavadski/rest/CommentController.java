@@ -2,7 +2,7 @@ package com.zavadski.rest;
 
 import com.zavadski.model.Comment;
 import com.zavadski.model.dto.*;
-import com.zavadski.service.api.CommentService;
+import com.zavadski.service.CommentService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

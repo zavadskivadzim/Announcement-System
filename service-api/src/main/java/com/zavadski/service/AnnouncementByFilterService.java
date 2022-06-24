@@ -1,4 +1,4 @@
-package com.zavadski.service.api;
+package com.zavadski.service;
 
 import com.zavadski.model.dto.AnnouncementByFilterDto;
 

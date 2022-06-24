@@ -4,8 +4,6 @@ import com.zavadski.dao.api.MessageDao;
 import com.zavadski.model.Message;
 import com.zavadski.model.User;
 import com.zavadski.model.dto.CreateMessageDto;
-import com.zavadski.service.api.MessageService;
-import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

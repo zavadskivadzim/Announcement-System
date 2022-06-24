@@ -3,9 +3,6 @@ package com.zavadski.service;
 import com.zavadski.dao.api.PaymentDao;
 import com.zavadski.model.Payment;
 import com.zavadski.model.dto.CreatePaymentDto;
-import com.zavadski.service.api.AnnouncementService;
-import com.zavadski.service.api.PaymentService;
-import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

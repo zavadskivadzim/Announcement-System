@@ -4,7 +4,6 @@ import com.zavadski.dao.api.RoleDao;
 import com.zavadski.dao.api.UserDao;
 import com.zavadski.model.Role;
 import com.zavadski.model.User;
-import com.zavadski.service.api.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

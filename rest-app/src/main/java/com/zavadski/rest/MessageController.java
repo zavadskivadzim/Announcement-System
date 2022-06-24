@@ -2,7 +2,7 @@ package com.zavadski.rest;
 
 import com.zavadski.model.Message;
 import com.zavadski.model.dto.CreateMessageDto;
-import com.zavadski.service.api.MessageService;
+import com.zavadski.service.MessageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

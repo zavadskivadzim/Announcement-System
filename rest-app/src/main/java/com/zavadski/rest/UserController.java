@@ -2,14 +2,13 @@ package com.zavadski.rest;
 
 import com.zavadski.model.User;
 import com.zavadski.model.dto.UserDto;
-import com.zavadski.service.api.UserService;
+import com.zavadski.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController

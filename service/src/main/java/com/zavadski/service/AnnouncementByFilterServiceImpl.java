@@ -2,7 +2,6 @@ package com.zavadski.service;
 
 import com.zavadski.dao.api.AnnouncementByFilterDao;
 import com.zavadski.model.dto.AnnouncementByFilterDto;
-import com.zavadski.service.api.AnnouncementByFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

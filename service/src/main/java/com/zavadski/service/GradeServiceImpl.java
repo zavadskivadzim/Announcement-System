@@ -4,8 +4,6 @@ import com.zavadski.dao.api.GradeDao;
 import com.zavadski.model.Grade;
 import com.zavadski.model.User;
 import com.zavadski.model.dto.CreateGradeDto;
-import com.zavadski.service.api.GradeService;
-import com.zavadski.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
